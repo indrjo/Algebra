@@ -1,0 +1,228 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../groups.tex
+
+\section{Group actions}
+
+\begin{definition}[Group actions I]\label{definition:ActionsI}
+An {\em action} of a group \(G\) --- we will sometimes say \(G\)-{\em action} --- on a set \(X\) is any of the homomorphisms \(\phi : G \to \cals_X\). We write \(\phi_g\) instead of \(\phi(g)\).
+\end{definition}
+
+You can view an action of a group \(G\) on a set \(X\) as the assignment of bijections \(\phi_g : X \to X\), one for each \(g \in G\), which cares of the group structure of \(G\) and \(\cals_X\) --- hence the requirement of being homomorphism.
+
+Some prefer to work the following equivalent definition.
+
+\begin{definition}[Group actions II]\label{definition:ActionsII}
+An {\em action} of a group \(G\) is a function
+\[\cdot : G \times X \to X\]
+such that
+\begin{tcbenum}
+\item \(1 \cdot x = x\) for every \(x \in X\)
+\item \((ab) \cdot x = a \cdot (b \cdot x)\) for every \(a, b \in G\) and \(x \in X\).
+\end{tcbenum}
+We often drop symbols indicating the action when it is clear that we are working with actions and not multiplying, say, two elements of a group.
+\end{definition}
+
+We make explicit how to perform the translation between the two definitions. If you are given a group homomorphism \(\phi : G \to \cals_X\), you can define
+\[\cdot : G \times X \to X\,, \ g \cdot x := \phi_g(x)\]
+a function that complies with the rules of the latter definition. Conversely, provided a function \(\cdot : G \times X \to X\) as in Definition~\ref{definition:ActionsII}, for every \(g \in G\) introduce the functions
+\[\phi_g : X \to X\,, \ \phi_g (x) := g \cdot x .\]
+These satisfy the remarkable property \(\phi_a\phi_b = \phi_{ab}\) for every \(a, b \in G\), following by (2). As a consequence, then \(\phi_g\) is bijective for every \(g \in G\): in fact
+\[\phi_{\inv g} \phi_g = \underbrace{\phi_1 = \id_X}_{\text{by (1)}} = \phi_1 = \phi_g \phi_{\inv g} .\]
+In conclusion, there is the group homomorphism \(\phi : G \to \cals_X\) with \(\phi_g\) being defined as above.
+
+Definition~\ref{definition:ActionsI} is very compact, whereas Definition~\ref{definition:ActionsII} introduces action as \q{external products}. The former definition requires you to provide bijections and then verify there is a certain homomorphism. The latter wants a couple of properties to be checked. If you wondering which is the more economical choice, the answer is that in general it cannot be said. In some cases, it is clear what the bijections are and how the elements of the acting group induce them, in some other cases, one may find more comfortable the latter alternative. Of course, there is no preference since they are equivalent, and you can switch from one version to another without worry.
+
+Here is an example on how things may look \q{meh} depending on what definition is chosen to represent actions.
+
+\begin{example}
+One action of \(\cals_X\) on a set \(X\) is the identity homomorphism \(\id_{\cals_X} : \cals_X \to \cals_X\). How lame, you would say, but this is no different from the function
+\[\cals_X \times X \to X \,, \ (f, x) \to f(x)\]
+which may elicit a rather different reaction in the reader.
+\end{example}
+
+Another examples will come, after we have introduced other stuff: they will later fit in a nice result, one of the bricks for the Sylow theorems.
+
+\begin{definition}[Stabilizers of actions]
+For \(G\) group, consider a set \(X\) with a \(G\)-action \(\phi\). For \(x \in X\), the {\em stabilizer} of \(x\) is the set
+\[\stab_\phi x \coloneq \set{g \in G \mid \phi_g(x) = x} .\]
+\end{definition}
+
+\begin{proposition}
+Let \(G\) be a group, \(X\) a set and \(\phi : G \to \cals_X\) a \(G\)-action on \(X\). The stabilizers of the elements of \(X\) are subgroups of \(G\).
+\end{proposition}
+
+\begin{proof}
+First, stabilisers are not empty, they have at least \(1\) as element. Further, for \(a, b \in \stab_\phi x\) we have
+\[\phi_{a \inv b}(x) = \phi_a (\phi_{\inv b} (x)) = \underbrace{\phi_a (\inv \phi_b(x)) = \phi_a (x)}_{\phi_b \in \cals_X \text{ and } \phi_b(x) = x} = x ,\]
+that is \(a \inv b \in \stab_\phi (x)\).
+\end{proof}
+
+Since a group action is a homomorphism, it makes sense to consider its kernel.
+
+\begin{proposition}
+For \(G\) group, \(X\) set with a \(G\)-action \(\phi : G \to \cals_X\) on it,
+\[\ker \phi = \bigcap_{x \in X} \stab_\phi x .\]
+\end{proposition}
+
+\begin{proof}
+\(\ker \phi = \set{g \in G \mid \phi_g = \id_X} = \set{g \in G \mid \phi_g(x) = x \text{ for every } x \in X}\).
+\end{proof}
+
+\begin{proposition}
+For \(G\) group, \(X\) set, \(\phi\) action of \(G\) on \(X\), we have
+\[\stab_\phi(\phi_g (x)) = g (\stab_\phi x) \inv g\]
+for every \(g \in G\) and \(x \in X\). 
+\end{proposition}
+
+\begin{proof}
+In fact, for every \(a \in G\)
+\begin{align*}
+a \in \stab_\phi (\phi_g (x)) & \lrarr \phi_g (x) = \phi_a (\phi_g (x)) = \phi_{ag} (x) \lrarr \\
+& \lrarr x = \phi_{\inv g a g} (x) \lrarr \inv g a g \in \stab_\phi x . \qedhere
+\end{align*}
+\end{proof}
+
+\begin{definition}[Orbits of actions]
+For \(G\) group, consider a set \(X\) and a \(G\)-action \(\phi\). For \(x \in X\), the {\em orbit} of \(x\) is
+\[\orb_\phi x \coloneq \set{y \in X \mid \phi_g(x) = y \text{ for some } g \in G}.\]
+\end{definition}
+
+In different a contexts, you may find the orbit of \(x \in X\) under the action \(\phi : G \to \cals_X\) written as \(Gx\). Such choice is motivated by the fact that actions can be defined as multiplications of elements of \(G\) with elements of \(X\): then \(Gx\) would mean something like \(\set{gx \mid g \in G}\). Indeed, the orbit a of an element is the collection of the results of all the elements of \(G\) doing their work.
+
+\begin{proposition}
+Let \(G\) be group, \(X\) be set and \(\phi\) be a \(G\)-action on \(X\). The orbits of the elements of \(X\) are equivalence classes induced by a suitable equivalence relation.
+\end{proposition}
+
+\begin{proof}
+The relation we are interested in is {\em conjugacy}: we say \(x \in X\) is {\em conjugated} to \(y \in X\) whenever \(\phi_g (x) = y\) for some \(g \in G\). It is an equivalence relation over \(X\) and the equivalence classes are the orbits.
+\end{proof}
+
+We will write \(X{/}\phi\) to indicate the quotient of \(X\) by the equivalence relation induced by the action \(\phi\) as it is explained in the last proof. Sometimes, you will find written \(X{/}G\) instead, emphasizing the acting group of the action because it is clear from the context what is the action of \(G\).
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\def\polyrad{2}
+\def\ang{20}
+\def\rotang{360/5}
+\def\norm{.6*\polyrad*cos(\rotang/2)}
+\coordinate [label=below left:\(O\)] (O) at (0,0);
+\foreach \i in {1, ..., 5} {
+	\coordinate (X\i) at ({360/5*\i}:\polyrad cm);
+}
+\fill [gray!30!white] (X1) -- (X2) -- (X3) -- (X4) -- (X5) -- (X5) -- cycle;
+\coordinate [label=below right:\(x\)] (X) at (\ang:{\norm});
+\coordinate [label=left:\(y\)] (Y) at ($(O)!1!\rotang:(X)$);
+\draw [thin, dashed] ($1.2*(X)$) -- (O) -- ($1.2*(Y)$);
+\draw [-{To[length=3.5pt,width=3.5pt]}, thick, shorten >= 2pt, shorten <= 2pt]
+	let
+		\p1 = (X),
+		\n1 = {veclen(\p1)}
+	in 
+		(X) arc [radius=\n1, start angle=\ang, end angle={\ang+\rotang}];
+\fill (O) circle (1pt);
+\fill (X) circle (1pt);
+\fill (Y) circle (1pt);
+\end{tikzpicture}
+\caption{The action \(\rho : \zz \to \cals_X\) with \(\rho_n : X \to X\) rotating points \(\frac{2\pi}{5}n\) around the centre of the polygon \(X\)}
+\label{fig:pentagon}
+\end{figure}
+
+\begin{example}
+One first example about actions is geometric. Consider a regular \(n\)-gon \(X \subseteq \cc\) whose centre is \(0\) and radius \(r > 0\) --- in Figure~\ref{fig:pentagon} we have drawn a pentagon. For \(k \in \zz\) consider the rotation \(\frac{2\pi}{n}k\) around the centre of the figure
+\[\rho_k : X \to X\,, \ \rho_k(x) := e^{i\frac{2\pi}{n}k} x.\]
+Such functions are bijections and \(\rho_{k_1 + k_2} = \rho_{k_1} \rho_{k_2}\) for every \(k_1, k_2 \in \zz\). In this case, the stabilizers are all equal
+\[\stab_\rho x = n\zz \ \text{for every } x \in X\]
+and orbits are the sets of \(n\) elements
+\[\orb_\rho x = \set{\rho_k (x) \mid 0 \le k \le n-1} .\]
+What is \(X{/}\rho\)? From each equivalence class we can pick exactly one element of the form \(re^{i\theta}\) with \(\theta \in \left[0, \frac{2\pi}{n}\right)\). This results in \(X{/}\rho\) being identified to the \q{slice}
+\[\set{r e^{i\theta} \left\mid \theta \in \left[0, \frac{2\pi}{n}\right) \right.} .\]
+\end{example}
+
+\begin{example}[Multiplying on the left]
+Consider a group \(G\) and for \(g \in G\) the functions
+\[\eta_g : G \to G\,, \ \eta_g(x) := gx .\]
+It is fairly simple to check that such functions form an action \(\eta : G \to \cals_G\). Take now \(g \in G\) such that \(\eta_g = \id_G\), that it \(gx = x\) for every \(x \in G\). Then \(g = 1\). This results in the stabilizers being all trivial, and consequently in \(\ker \eta\) being trivial. The action \(\eta : G \to \cals_G\) is injective.
+\end{example}
+
+This fact is known better as
+
+\begin{proposition}[Cayley Theorem]
+Any group \(G\) has a isomorphic copy inside \(\cals_G\).
+\end{proposition}
+
+%\begin{example}
+%Consider a group \(G\) with a subgroup \(H\) and define the action of \(G\) on the set of left cosets of \(H\):
+%\[G \times \cals_{G{/}\call_H} \to \cals_{G{/}\call_H}\,, \ (g, C) \to gC .\]
+%\end{example}
+
+\begin{example}[Action of conjugacy]
+For \(G\) group, there is an important \(G\)-action on \(G\):
+\[\kappa : G \to \cals_G ,\]
+where the function \(\kappa_g : G \to G\) is defined by \(\kappa_g(x) = g x\inv g\). Actually, \(\kappa_g\) is an automorphism of \(G\), but here we only care it is a bijection. It is useful to give some new notation in this case:
+\begin{align*}
+& C_G(x) \coloneq \stab_\kappa x = \set{g \in G \mid gx = xg} \\
+& [x]_G \coloneq \orb_\kappa x = \set{g x \inv g \mid g \in G} .
+\end{align*}
+The centre of the group \(G\) is just \(\ker \kappa = \bigcap_{x \in G} C_G(x)\).
+\end{example}
+
+Here we are with one of the most fecund facts:
+
+\begin{proposition}\label{prop:OrbsStabsCosets}
+Consider a group \(G\), a set \(X\) and \(\phi\) a \(G\)-action on \(X\). Then for every \(x \in X\) there exists a bijection form \(G/\call_{\stab_\phi x}\) to \(\orb_\phi x\). In particular, if \(G\) is a finite group, then \(\abs{\stab_\phi x} \abs{\orb_\phi x} = \abs G\).
+\end{proposition}
+
+\begin{proof}
+First of all, consider the surjective function
+\[f : G 	\to \orb_\phi x,\, f(g) := \phi_g(x) .\]
+Observe that, given \(g_1, g_2 \in G\) such that \(g_1 = g_2 h\) for some \(h \in \stab_\phi x\), we have
+\[f(g_2) = \underbrace{\phi_{g_2} (x) = \phi_{g_2} \left(\phi_h (x)\right)}_{\text{because } h \in \stab_\phi x} = \phi_{g_2h} (x) = f(g_2 h) = f(g_2) .\]
+Thus by Proposition~\ref{prop:SetIso1}, we have the surjective \(\bar f\) that makes commute the following diagram
+\[\begin{tikzcd}[column sep=tiny]
+G \ar["{\text{projection}}", dr, swap] \ar["f", rr] & & \orb_\phi x \\
+ & G{/}{\call_{\stab_\phi x}} \ar["{\bar f}", ur, swap]
+\end{tikzcd}\]
+(Recall how \(\call_H\) is defined for subgroups \(H\) of \(G\) if you find hard to get this.) Now, only injectivity remains to be proved. Take \(a, b \in G\) with \(\phi_a (x) = \phi_b (x)\): in this case \(x = \phi_{\inv b} (\phi_a (x)) = \phi_{\inv b a} (x)\); so \(\inv b a \in \stab_\phi (x)\), that is \(a \stab_\phi x = b \stab_\phi x\). Thanks to Proposition~\ref{prop:SetIso1} again, we can conclude the proof.
+\end{proof}
+
+This theorem poses a strong relation between orbits and stabilizers. For example, inheriting the notation of the last theorem, \(\orb_\phi x = \set{x}\) is equivalent to \(\stab_\phi x = G\) for every \(x \in X\).
+
+\begin{proposition}[Class Formula]\label{prop:ClassFormulaForSets}
+Let \(X\) be a finite set, \(G\) a group, \(\phi\) a \(G\)-action on \(X\) and \(F \subseteq X\) that has one element from each conjugacy class of \(X\). Then
+\[\abs X = \sum_{x \in F} [G : \stab_\phi x] .\]
+\end{proposition}
+
+\begin{proof}
+\(X\) is partitioned by the orbits of its elements and Proposition~\ref{prop:OrbsStabsCosets} tells how to calculate their cardinality.
+\end{proof}
+
+\begin{proposition}[Class Formula for groups]\label{prop:ClassFormulaForGroups}
+For \(G\) finite group, let \(F \subseteq G\) that has one element from each conjugacy class of \(G\). Then \(\calz G \subseteq F\) and \(\set{\calz G} \cup \set{[x]_G \mid x \in F \setminus \calz G}\) is a partition of \(G\). Moreover, we have
+\begin{equation}\abs G = \abs{\mathcal Z G} + \sum_{x \in F \setminus \mathcal Z G} [G:C_G(x)] .\label{eqn:ClassForm}\end{equation}
+\end{proposition}
+
+\begin{proof}
+If \(x \in \calz G\), then \([x]_G = \set{x}\). Hence \(F\) owns all the elements of the centre of \(G\). Follows from what we have just shown. Identity~\eqref{eqn:ClassForm} derives from Proposition~\ref{prop:ClassFormulaForSets}.
+\end{proof}
+
+\begin{corollary}
+Let \(G\) be a group with \(p^n\) elements, where \(p\) is a prime number. Then \(p\) divides \(\abs{\calz G}\); in particular, \(\calz G\) cannot be a trivial group.
+\end{corollary}
+
+\begin{proof}
+Consider \(R \subseteq G\) such that \(\set{[x]_G \mid x \in R}\) is a partition of \(G\). Obviously, \(p\) cannot divide the cardinality of any \([x]_G\) with \(x \in \calz G\), because they are singletons. If \(p\) does not divide \(\abs{[x]_G} = \abs G / \abs{C_G(x)}\) for some \(x \in R \setminus \calz G\), then \(\abs{C_G (x)} = \abs G\) and so \(C_G(x) = G\). But in this case, \(g x \inv g = x\), viz \(gx = xg\), for every \(g \in G\), and then \(x \in \calz G\). Absurd. \(p\) divides also non banal conjugacy classes. The conclusion we want follows immediately.
+\end{proof}
+
+\begin{corollary}
+For \(p\) prime number, any group with \(p^2\) elements is abelian.
+\end{corollary}
+
+\begin{proof}
+Let \(G\) be a group with \(\abs G = p^2\). By the previous corollary, \(\calz G\) must have \(p\) or \(p^2\) elements. If it has \(p\), then \(\abs{G / \calz G} = p\) and consequently \(G/\calz G\) is cyclic (Lemma~\ref{cor:GroupsWithPrimeCardAreCyclic}). This is equivalent to saying \(G = \calz G\), which cannot happen since the twos have a different number of elements. In conclusion, the unique alternative survives is \(\abs{\calz G} = p^2\); in particular \(\calz G = G\) since the groups are both finite.
+\end{proof}
+
+\begin{exercise}
+Now you are aware that, for \(p\) prime number, any group \(G\) of order \(p^2\) must be abelian, you can go deeper: show that \(G \cong \zz/p^2\zz\) if it is cyclic, \(G \cong \zz/p\zz \times \zz/p\zz\) otherwise. (Hint: if \(G\) is not cyclic, there exist \(x, y \in G\) such that \(\gen x \cap \gen y = \set{1}\).)
+\end{exercise}
