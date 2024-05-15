@@ -1,0 +1,170 @@
+% !TEX root = ./campi.tex
+% !TEX program = lualatex
+
+\documentclass[ structure      = article
+              , maketitlestyle = standard
+              , twocolcontents = toc
+              , secstyle       = center
+              , secfont        = roman
+              , liststyle      = aligned
+              , quotesize      = normalsize
+              , headerstyle    = center
+              , footnotestyle  = dotted
+              ]{suftesi}
+
+\usepackage[no-math]{fontspec}
+\usepackage[rm,tt=false]{libertine}
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+\setotherlanguage{english}
+\setotherlanguage{german}
+\usepackage{microtype}
+
+\usepackage{hyperref}
+\hypersetup{ breaklinks
+           , colorlinks
+           , allcolors = blue!50!black
+           }
+
+\usepackage[autostyle,italian=quotes]{csquotes}
+\usepackage[ bibstyle     = alphabetic
+           , citestyle    = alphabetic
+           , pluralothers = true
+           , autolang     = langname
+           ]{biblatex}
+\addbibresource{biblio.bib}
+\nocite{*}
+
+\usepackage{enumitem}
+\setlist[enumerate]{ref=(\arabic*)}
+
+\usepackage{graphicx}
+
+\usepackage{libertinust1math}
+\usepackage{MnSymbol}
+\usepackage[bb=ams]{mathalfa}
+\usepackage{mathtools}
+\let\underbrace\LaTeXunderbrace
+\let\overbrace\LaTeXoverbrace
+
+\usepackage{amsthm}
+\newcounter{thmcounter}
+\counterwithin{thmcounter}{section}
+
+\theoremstyle{definition}
+
+\newtheorem{teor}[thmcounter]{Teorema}
+\newtheorem{prop}[thmcounter]{Proposizione}
+\newtheorem{lemm}[thmcounter]{Lemma}
+\newtheorem{coro}[thmcounter]{Corollario}
+\newtheorem{defi}[thmcounter]{Definizione}
+\newtheorem{osse}[thmcounter]{Osservazione}
+\newtheorem{rich}[thmcounter]{Richiamo}
+\newtheorem{esem}[thmcounter]{Esempio}
+\newtheorem{eser}[thmcounter]{Esercizio}
+\newtheorem{cons}[thmcounter]{Costruzione}
+
+\numberwithin{equation}{section}
+
+\usepackage{tikz}
+\usetikzlibrary{ calc
+               , babel
+               , cd
+               }
+\tikzset{>={To[length=3pt,width=3pt]}}
+\tikzcdset{ row sep/normal=.7cm
+          , column sep/normal=.7cm
+          , arrow style=tikz
+          , diagrams={>={To[length=3.5pt,width=4pt]}}
+          , shorten=-2pt
+          }
+
+\newcommand{\im}{\operatorname{im}} % image of a morphism
+%\newcommand{\cok}{\operatorname{coker}} % coker of a morphism
+\newcommand{\iso}{\cong}
+\newcommand{\niso}{\ncong}
+\newcommand{\all}{\forall\,}
+\newcommand{\exi}{\exists\,}
+%\newcommand{\nexi}{\nexists\,}
+\newcommand{\exiun}{\exists!\,}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\st}{\,:\,} % such that
+%\newcommand{\dual}{^{\vee}} % dual
+\newcommand{\comp}{\circ} % composition
+\newcommand{\mor}[1]{\xrightarrow{\,#1\,}}
+%\newcommand{\mono}{\hookrightarrow} % monomorphism
+%\newcommand{\epi}{\twoheadrightarrow} % epimorphism
+\newcommand{\isomor}{\mor{\sim}} % isomorphism
+\newcommand{\rat}{\dashrightarrow} % rational map
+\newcommand{\card}[1]{\left\lvert#1\right\rvert} % cardinality of a set
+\newcommand{\rest}[1]{|_{#1}} % restriction of function
+\newcommand{\abs}[1]{\lvert#1\rvert} % absolute value
+\newcommand{\N}{\mathbb{N}} % natural numbers
+\newcommand{\Z}{\mathbb{Z}} % integer numbers
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{{\mathbb F}}
+%\newcommand{\Hom}{\mathrm{Hom}}
+%\newcommand{\End}{\mathrm{End}}
+%\newcommand{\Iso}{\mathrm{Isom}}
+\newcommand{\Aut}{\mathrm{Aut}}
+%\newcommand{\Ann}{\mathrm{Ann}}
+\newcommand{\mcd}{{\rm mcd}}
+\newcommand{\mcm}{{\rm mcm}}
+\newcommand{\ord}{{\rm ord}}
+\newcommand{\cl}[1]{\mspace{1mu}\overline{\mspace{-1mu}#1\mspace{-1mu}}\mspace{1mu}}
+%\newcommand{\clp}[2][]{[#2]_{#1}}
+\newcommand{\dvd}{\mid}
+\newcommand{\ndvd}{\nmid}
+\newcommand{\primi}{\mathcal{P}}
+%\newcommand{\modmor}{\alpha}
+%\newcommand{\modmorb}{\beta}
+%\newcommand{\opp}{^{op}}
+%\newcommand{\gen}[2][]{\left\langle#2\right\rangle_{#1}}
+\newcommand{\gen}[1]{\left\langle#1\right\rangle}
+\renewcommand\bar\overline
+%\newcommand{\supp}{\mathrm{Supp}}
+%\newcommand{\rk}{\mathrm{rk}}
+%\newcommand{\GL}{\mathrm{GL}}
+%\newcommand{\SL}{\mathrm{SL}}
+%\newcommand{\PSL}{\mathrm{PSL}}
+\newcommand{\mat}[2]{\mathrm{M}_{#1}(#2)}
+\newcommand{\tor}{\mathrm{T}}
+\newcommand{\pro}{\mathrm{pr}}
+\newcommand{\inc}{\mathrm{in}}
+%\newcommand{\reg}{\mathrm{reg}}
+%\newcommand{\Max}{\mathrm{Max}}
+\newcommand{\az}{\varphi}
+\newcommand{\rp}{\rho}
+\newcommand{\esp}[1]{\operatorname{exp}\left(#1\right)}
+%\newcommand{\abn}{\mathrm{ab}}
+%\newcommand{\pn}{\mathrm{p}}
+%\newcommand{\ab}[1]{#1_{\mathrm{ab}}}
+
+%\newcommand{\conj}{\Gamma}
+%\newcommand{\molt}{L}
+%\newcommand{\Int}{\mathrm{Int}}
+\newcommand{\parti}{\mathcal{P}}
+\newcommand{\normal}{\triangleleft}
+%\newcommand{\nnormal}{\ntriangleleft}
+\newcommand{\cc}[1]{[#1]}
+%\newcommand{\Stab}{\mathrm{Stab}}
+%\newcommand{\cent}{C}
+\newcommand{\norm}{N}
+%\newcommand{\Id}{\mathrm{I}}
+\newcommand{\car}{\mathrm{char}}
+\newcommand{\polmin}{\mathrm{m}}
+\newcommand{\calg}[2][]{\overline{#2}^{_{#1}}}
+\newcommand{\Gal}[2][]{\operatorname{Gal}_{#1}\!\left(#2\right)}
+\newcommand{\Fro}{\mathcal{F}}
+\newcommand{\notimplies}{\not{\implies}}
+
+
+%%%
+
+\renewcommand\implies\Rightarrow
+\renewcommand\impliedby\Leftarrow
+\renewcommand\iff\Leftrightarrow
+\usepackage{xcolor}
+\newcommand\nota[1]{\textcolor{red}{[#1]}}
