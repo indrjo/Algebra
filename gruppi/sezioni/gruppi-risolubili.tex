@@ -1,0 +1,82 @@
+% !TEX root       = ../gruppi.tex
+% !TEX program    = lualatex
+% !TEX spellcheck = it_IT
+
+\section{Gruppi risolubili}
+
+\begin{defi}
+Un gruppo $G$ è {\em risolubile} se esistono sottogruppi
+\[
+\{1\}=K_r \normal K_{r-1} \normal\cdots \normal K_1 \normal K_0=G
+\]
+tali che $K_{i-1}/K_i$ è abeliano per ogni $i=1,\dots,r$.
+\end{defi}
+\begin{esem}
+$G$ è risolubile in ciascuno dei seguenti casi:
+\begin{itemize}
+\item $G$ è abeliano ($r=1$);
+\item $G=D_n$ ($r=2$, $K_1=\gen{R}$), quindi anche $G=S_3\iso D_3$;
+\item $G=S_4$ ($r=3$, $K_1=A_4$, $K_2=V_4$);
+\item $\card{G}=p^n$ ($r=n$ e per induzione $\exists K_i \normal K_{i-1}$ tale che $\card{K_i}=p^{n-i}$).
+\end{itemize}
+Un gruppo semplice non abeliano (per esempio $A_n$ per ogni $n\ge5$) non è risolubile.
+\end{esem}
+
+
+%\section{Proprietà dei gruppi risolubili}
+
+\begin{prop}
+\begin{enumerate}
+\item $H<G$ e $G$ risolubile $\implies$ $H$ risolubile.
+\item $H \normal G$ e $G$ risolubile $\implies$ $G/H$ risolubile.
+\item $H \normal G$, $H$ e $G/H$ risolubili $\implies$ $G$ risolubile.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+\begin{enumerate}
+\item $\{1\}=K_r \normal\cdots \normal K_0=G$ $\implies$ $K'_i:=K_i\cap H$ per $i=0,\dots,r$ tali che $\{1\}=K'_r<\cdots<K'_0=H$. Inoltre per ogni $i=1,\dots,r$
+\[
+K'_{i-1}=K_{i-1}\cap H\mor{j_i}K_{i-1}\mor{p_i}K_{i-1}/K_i
+\]
+(con $j_i$ l'inclusione e $p_i$ la proiezione) è un omomorfismo tale che $\ker(p_i\circ j_i)=K_i\cap H=K'_i \normal K'_{i-1}$. Per il teorema di omomorfismo esiste $K'_{i-1}/K'_i\to K_{i-1}/K_i$ omomorfismo iniettivo, dunque $K_{i-1}/K_i$ abeliano $\implies$ $K'_{i-1}/K'_i$ abeliano.
+\item $\pi : G\to\cl{G}:=G/H$ proiezione, $\{1\}=K_r \normal\cdots \normal K_0=G$ $\implies$ $\cl{K}_i:=\pi(K_i)$ per $i=0,\dots,r$ tali che $\{\cl{1}\}=\cl{K}_r<\cdots<\cl{K}_0=\cl{G}$. Inoltre per ogni $i=1,\dots,r$ $\cl{K}_i \normal\cl{K}_{i-1}$ (perché $\pi(g)\pi(a)\pi(g)^{-1}=\pi(gag^{-1})\in\cl{K}_i$ per ogni $g\in K_{i-1}$ e per ogni $a\in K_i$, dato che $gag^{-1}\in K_i$) e
+\[
+K_{i-1}\mor{\pi_i}\pi(K_{i-1})=\cl{K}_{i-1}\mor{\cl{p}_i}\cl{K}_{i-1}/\cl{K}_i
+\]
+(con $\pi_i$ indotto da $\pi$ e $\cl{p}_i$ la proiezione) è un omomorfismo suriettivo tale che $K_i\subseteq\ker(\cl{p}_i\circ\pi_i)$. Per il teorema di omomorfismo esiste un omomorfismo suriettivo $K_{i-1}/K_i\to\cl{K}_{i-1}/\cl{K}_i$, dunque $K_{i-1}/K_i$ abeliano $\implies$ $\cl{K}_{i-1}/\cl{K}_i$ abeliano.
+\item $\{1\}=K'_r \normal\cdots \normal K'_0=H$ e $\{\cl{1}\}=\cl{K}_s \normal\cdots \normal\cl{K}_0=\cl{G}$ (dove $\cl{K}_i=K_i/H$ con $H<K_i<G$ per $i=0,\dots,s$) $\implies$ $\{1\}=K'_r \normal\cdots \normal K'_0=K_s \normal\cdots \normal K_0=G$. Inoltre per ogni $i=1,\dots,s$ $K_{i-1}/K_i\iso\cl{K}_{i-1}/\cl{K}_i$ per il terzo teorema di isomorfismo. \qedhere
+\end{enumerate}
+\end{proof}
+
+Conseguenze:
+\begin{itemize}
+\item $G\iso H<S_4$ $\implies$ $G$ risolubile.
+\item $n\ge5$ $\implies$ $S_n$ non risolubile: $A_n<S_n$ e $A_n$ non è risolubile.
+\item $\card{G}=pq$ o $p^2q$ (con $p$ e $q$ primi distinti) $\implies$ $G$ risolubile: \\
+$\exists H \normal G$ con $H$ di Sylow, quindi $H$ e $G/H$ sono abeliani e pertanto risolubili.
+\item $\card{G}=pqr$ (con $p$, $q$ e $r$ primi distinti) $\implies$ $G$ risolubile: \\
+$\exists H \normal G$ con $H$ di Sylow, quindi $H$ è abeliano e $G/H$ è risolubile per il punto precedente.
+\item $\card{G}<60$ $\implies$ $G$ risolubile: \\
+se $G$ non è abeliano, $\exists H \normal G$ non banale $\implies$ induttivamente $H$ e $G/H$ sono risolubili.
+\end{itemize}
+
+
+%\section{Caratterizzazione dei gruppi risolubili}
+
+Ricordiamo che il sottogruppo dei commutatori di un gruppo $G$ è
+\[
+[G,G]:=\gen{aba^{-1}b^{-1} :  a,b\in G} \normal G
+\]
+tale che, se $H \normal G$, allora $G/H$ è abeliano $\iff$ $[G,G]\subseteq H$. Definendo $G^{(0)}:=G$ e induttivamente $G^{(i)}:=[G^{(i-1)},G^{(i-1)}]$ per ogni $i>0$, si ha allora $G^{(i)} \normal G^{(i-1)}$ e $G^{(i-1)}/G^{(i)}$ è abeliano per ogni $i>0$.
+
+\begin{prop}[Caratterizzazione dei gruppi risolubili]
+$G$ è risolubile $\iff$ $\exists r\in\N$ tale che $G^{(r)}=\{1\}$.
+\end{prop}
+
+\begin{proof}
+\begin{itemize}
+\item[$\impliedby$] Chiaro.
+\item[$\implies$] $\{1\}=K_r \normal\cdots \normal K_0=G$ con $K_{i-1}/K_i$ abeliano per ogni $i=1,\dots,r$ $\implies$ $G^{(i)}\subseteq K_i$ per ogni $i=0,\dots,r$ per induzione su $i$: vero se $i=0$; se $i>0$ per induzione $G^{(i-1)}\subseteq K_{i-1}$ $\implies$ $G^{(i)}=[G^{(i-1)},G^{(i-1)}]\subseteq[K_{i-1},K_{i-1}]\subseteq K_i$ \\
+perché $K_{i-1}/K_i$ è abeliano. Dunque $G^{(r)}=\{1\}$. \qedhere
+\end{itemize}
+\end{proof}

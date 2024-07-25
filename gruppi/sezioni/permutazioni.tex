@@ -1,0 +1,261 @@
+% !TEX root       = ../gruppi.tex
+% !TEX program    = lualatex
+% !TEX spellcheck = it_IT
+
+\section{Permutazioni}
+
+Indichiamo con $S_n$ l'insieme delle permutazioni dell'insieme $\{1, \dots{}, n\}$, con $n \in \N$. Forma un gruppo, chiamato {\em gruppo simmetrico}, se si considera assieme all'operazione di composizione di permutazioni e alla permutazione identità. Presi $x_1, \dots{}, x_r \in \{1, \dots{}, n\}$ a due a due distinti, indichiamo con
+\[(x_1, \dots{}, x_r)\]
+l'elemento di $S_n$ che manda $x_i$ in $x_{i+1}$ se $i < n$ e $x_{n+1}$ in $x_1$. Questo tipo di permutazione prende il nome di $r$-{\em ciclo} o di {\em ciclo di lunghezza} $r$. I $2$-cicli prendono il nome di {\em trasposizioni}. Due cicli $(x_1, \dots{}, x_r)$ e $(y_1, \dots{},y_s)$ sono detti {\em disgiunti} qualora $x_i \ne y_j$ per ogni $i$ e $j$.
+
+Ricapitoliamo alcuni fatti base che dovrebbero essere noti da {\scshape Algebra I}.
+
+\begin{itemize}
+\item $\card{S_n}=n!$.
+\item I cicli disgiunti commutano.
+\item Ogni permutazione si può decomporre in maniera unica (a meno dell'ordine) in cicli disgiunti.
+\item Ogni permutazione si può decomporre in $2$-cicli; questa volta la decomposizione può non essere unica. Ecco alcune decomposizioni in trasposizioni di uno stesso ciclo:
+\[(a_1, a_2, a_3 \dots{}, a_n) = \begin{cases} (a_1, a_n) \cdots{} (a_1, a_3) (a_1, a_2) \\ (a_1, a_2) (a_2, a_3) \cdots (a_{n-1}, a_n) \end{cases}.\]
+Osserviamo che $S_n$ non è un gruppo {\em libero} sull'insieme delle trasposizioni: infatti per ogni trasposizione $\tau \in S_n$ si ha $\tau^2 = \id$. %infatti $(1,2) \circ (1,2)$ è l'identità.
+%\item $S_n=\gen{\{\text{$2$-cicli}\}}$.
+\item Il {\em segno} di una permutazione è definito come l'omomorfismo di gruppi $\varepsilon : S_n \to \{\pm 1\} \iso C_2$ tale che $\varepsilon(\sigma)=(-1)^{m-1}$ per ogni $m$-ciclo $\sigma \in S_n$.
+\item $S_n$ ha un sottogruppo normale, il {\em gruppo alternante}
+\[A_n := \ker \varepsilon .\]
+\item $\card{A_n}=\frac{n!}{2}$ per ogni $n\ge2$
+%\item Ogni elemento di $A_n$ si può decomporre in $3$-cicli. %=\gen{\{\text{$3$-cicli}\}}$.
+%\item $A_3=\{1,(1,2,3),(1,3,2)\}$ e $S_3\setminus A_3=\{(1,2),(1,3),(2,3)\}$.
+%\item Gli unici sottogruppi non banali di $S_3$ sono $A_3$ (normale) e $\gen{(1,2)}$, $\gen{(1,3)}$, $\gen{(2,3)}$ (non normali).
+%\item $A_4 = V_4 \coprod \{\text{$3$-cicli}\}$ e $S_4 \setminus A_4 = \{\text{$2$-cicli}\} \coprod \{\text{$4$-cicli}\}$ con
+%\[C_2^2 \iso V_4 := \{1,(1,2)(3,4),(1,3)(2,4),(1,4)(2,3)\} \normal S_4\]
+%($\implies$ $V_4 \normal A_4$), $\card{\{\text{$3$-cicli}\}}=8$, $\card{\{\text{$2$-cicli}\}}=\card{\{\text{$4$-cicli}\}}=6$.
+%\item Gli unici sottogruppi normali non banali di $S_4$ sono $V_4$ e $A_4$: $H \normal S_4$ $\implies$ $\card{H}\mid24$ e $H$ è unione di classi di coniugio $\implies$ $\card{H}=1+3a+8b+6c+6d$ con $a,b,c,d\in\{0,1\}$ $\implies$ $a=1$ e $c=d=0$ se $1<\card{H}<24$.
+\end{itemize}
+
+\begin{prop}
+Ogni elemento di $A_n$ si può decomporre in $3$-cicli.
+\end{prop}
+
+\begin{proof}
+Abbiamo visto che una qualsiasi permutazione può essere decomposta in un numero finito di trasposizioni. Poiché il segno delle permutazioni di $A_n$ è $1$, allora queste si possono decomporre in un numero {\em pari} di trasposizioni. Facciamo vedere che il prodotto di due trasposizioni è l'identità oppure il prodotto di $3$-cicli. A tal scopo siano $i < j$ e $k < l$ e calcoliamo:
+\[(i, j)(k, l) = \begin{cases} \id & \text{se } (i, j) = (k, l) \\ (i, j, l) & \text{se } j = k \\ (i, j, k) (j, k, l) & \text{altrimenti} \end{cases} \qedhere\]
+\end{proof}
+
+\begin{rich}[Il gruppo diedrale]\label{rich:GruppoDiedrale}
+Richiamiamo il {\em gruppo diedrale} di ordine $n \ge 3$, cioè il gruppo indicato con $D_n$ e generato da due simboli $r$ e $s$ soddisfacenti le seguenti regole:
+\begin{align}
+& r^n    = 1 \label{diedrale:regolaR} \\
+& s^2    = 1 \label{diedrale:regolaS} \\
+& (sr)^2 = 1 \label{diedrale:regolaSR}
+\end{align}
+Si usa scrivere più compattamente:
+\[D_n := \gen{r, s \mid r^n = 1, s^2 = 1, (sr)^2 = 1} .\]
+Osserviamo che l'inverso di $s$ è $s$ stesso. Possiamo elencare esplicitamente tutti i $2n$ elementi di questo gruppo:
+%\begin{align*}
+%& 1, r,  r^2,  \dots{}, r^{n-1}  \\
+%& s, sr, sr^2, \dots{}, sr^{n-1}
+%\end{align*}
+\[ 1, r,  r^2,  \dots{}, r^{n-1}, s, sr, sr^2, \dots{}, sr^{n-1} \]
+Non è difficile da dimostrare. Consideriamo una generica stringa finita
+\[x_1 x_2 \cdots{} x_n\]
+dove $\{x_1, \dots{}, x_n\} \subseteq \{r, r^{-1}, s\}$. Possiamo pure usare una notazione compatta che fa uso di esponenti interi, ma in questa sede è conveniente un po' di ridondanza. Assumiamo anche che non appaiano sotto-stringe $rr^{-1}$ e $r^{-1}r$. Dalle regole~\ref{diedrale:regolaS} e~\ref{diedrale:regolaSR} discendono due ulteriori relazioni
+\[ sr = r^{-1}s \quad\text{e}\quad rs = sr^{-1} .\]
+%\begin{align*}
+%& sr = r^{-1}s \\
+%& rs = sr^{-1} .
+%\end{align*}
+La conseguenza è che si possono spostare le $s$ tutte in testa facendo attenzione a cambiare gli esponenti delle $r$ scambiate con le $s$. Ora è sufficiente ridurre:
+\begin{itemize}
+\item Per la regola~\ref{diedrale:regolaS}, un numero pari di $s$ le farà sparire, mentre un numero dispari lascerà in testa una sola $s$.
+\item La coda fatta di sole $r^{\alpha_i}$, con $\alpha_i \in \{1, -1\}$, si riduce ad un'unica $r^\alpha$. Sia ora $\rho$ il resto della divisione Euclidea tra $\alpha$ e $n$: a causa della regola~\ref{diedrale:regolaR}, $r^\alpha$ di può ridurre a $r^\rho$. Per come è definito il resto, si ha $\rho \in \{0, \dots{}, n-1\}$.
+\end{itemize}
+\nota{Fare qualche esempio di riduzione?}
+%
+\begin{figure}
+\centering
+\CayleyDihedral{6}
+\caption{Grafo di Cayley di $D_6$. Muoversi lungo le frecce blu seguendone il verso significa moltiplicare per $r$ a destra, mentre nel verso opposto significa moltiplicare per $r^{-1}$ a destra. Muoversi lungo i segmenti rossi, in qualunque senso, significa moltiplicare per $s$ (visto che $s$ è l'inverso di se stessa)}
+\end{figure}
+%
+Può essere anche utile richiamare l'idea geometrica che sta dietro. Consideriamo un poligono regolare $\Delta_n$ in cui numeriamo in vertici in senso orario.
+%
+%\begin{figure}
+%\centering
+%\begin{tabular}{@{}c@{}}
+%\ngon{5}
+%\end{tabular}
+%\hspace{.1\textwidth}
+%\begin{tabular}{@{}c@{}}
+%\ngon{6}
+%\end{tabular}
+%\caption{Poligoni regolari coi vertici numerati in senso orario}
+%\end{figure}
+%
+Visualizziamo $r$ come la rotazione attorno al centro del poligono di un angolo $\frac{2\pi}{n}$ e con $s$ la simmetria rispetto all'asse di simmetria della figura che passa per il vertice numerato con $1$. Quindi $r$ è identificato con la permutazione $(1, \dots{}, n)$ mentre $s$ con la permutazione che scambia tra loro i numeri ai vertici simmetrici rispetto all'asse di simmetria verticale. La visualizzazione del prodotto $sr$ è la composizione di una simmetria e di una rotazione. Verifichiamo che le regole vengono mantenute: $n$ rotazioni consecutive riportano i punti dove erano, così due simmetrie consecutive; infine la rotazione porta $i$ in $i+1$, il simmetrico di $i+1$ viene portato in cui punto per rotazione che è il simmetrico di $i$. Abbiamo realizzato cioè l' omomorfismo inclusione $D_n \hookrightarrow S_n$. A tal scopo osserviamo che esiste una coincidenza fortunata: $D_3 \iso S_3$.
+\end{rich}
+
+Ricordiamo un fatto carino per quanto riguarda il gruppo diedrale.
+
+\begin{prop}[Gruppi di ordine $2p$]\label{prop:Gruppi2P}
+I gruppi di ordine $2p$ con $p \ge 3$ primo sono (a meno di isomorfismo) due: $C_{2p}$ oppure $D_p$.
+\end{prop}
+
+\begin{proof}
+Per il {\scshape Teorema di Sylow I}, un siffatto gruppo $G$ possiede due sottogruppi ciclici di ordine $2$ e $p$ rispettivamente. Sia $H = \gen r$ con $r \in G$ di ordine $p$. Per il {\scshape Teorema di Sylow II}, si ha $s_p = 1$ e quindi $H$ è normale. Se $s \in G$ è elemento di ordine $2$, allora $s \notin H$ e
+\[G = H \cup sH = \left\{ 1, r, \dots{}, r^{p-1}, s, sr, \dots{}, sr^{p-1} \right\} .\]
+Questo ricorda tanto il gruppo diedrale, ma non bisogna avere fretta: $r$ e $s$ soddisfano le regole~\ref{diedrale:regolaR}, \ref{diedrale:regolaS} e~\ref{diedrale:regolaSR}? Le prime due sì, la rimanente non necessariamente. Poiché $H$ è normale, $r^i = srs^{-1} = srs$ per qualche $i$. Ne segue che $r^{i^2} = (srs)^i = s r^i s = r$ e cioè $i^2 \equiv 1 \mod p$. Ricordando che ${\Z}{/}{p\Z}$ è un campo perché $p$ è primo, si ha $i \equiv 1 \mod p$ oppure $i \equiv -1 \mod p$. Nel primo caso $G$ è abeliano ($r$ e $s$ commutano) di ordine $2p$, mentre nel secondo caso $(sr)^2 = 1$ e siamo nel caso del gruppo diedrale.
+\end{proof}
+
+\begin{osse}[\textgerman{Vierergruppe} o gruppo di \textgerman{Klein} $V_4$]
+\nota{Ancora da scrivere\dots{}}
+\end{osse}
+
+%\section{I sottogruppi di $S_4$}
+
+Possiamo classificare i sottogruppi di $S_4$ a questo punto.
+
+\begin{prop}[I sottogruppi di $S_4$]
+I sottogruppi di $S_4$ sono (a meno di isomorfismo): $C_2$, $C_3$, $C_4$, $C_2 \times C_2$, $S_3$, $D_4$, $A_4$.
+%$\exists H<S_4$ non banale tale che $H\iso G$ $\iff$ $G$ è isomorfo a uno dei seguenti gruppi: $C_2$, $C_3$, $C_4$, $C_2^2$, $S_3$, $D_4$, $A_4$.
+\end{prop}
+
+\begin{proof}
+Verifichiamo che ciascuno di quei gruppi ha una copia isomorfa dentro $S_4$. 
+\begin{itemize}
+\item Se $\sigma$ è un $m$-ciclo, allora $\gen\sigma \iso C_m$.
+\item $V_4 \iso C_2 \times C_2$.
+\item $H := \{\sigma \in S_4 : \sigma(4)=4\}$ è isomorfo a $S_3$.
+\item Nel richiamo fatto poco sopra sul gruppo diedrale abbiamo visto come realizzare un'inclusione $D_n \hookrightarrow S_n$.
+\item $A_4$ è un sottogruppo di $S_4$ per definizione.
+\end{itemize}
+Sia $H$ un sottogruppo di $S_4$: per il {\scshape Teorema di Lagrange}, $\card H$ è un divisore di $4! = 24$.
+\begin{itemize}
+\item Se $\card H \le 3$, allora $H$ è ciclico.
+\item Se $\card H = 4 = 2^2$, allora $H$ è $C_2 \times C_2$ oppure $C_4$ (vedi Corollario~\ref{coro:GruppiP2}).
+\item Se $\card H = 6 = 2 \cdot 3$, allora per la Proposizione~\ref{prop:Gruppi2P} dobbiamo concludere che è isomorfo a $D_3 \iso S_3$ perché in $S_4$ non ci sono elementi di ordine $6$.
+\item Sia $\card{H}=8$. Osservando che $24 = 2^3 \cdot 3$, i $2$-Sylow hanno tutti ordine $8$ e sono tutti coniugati. Un sottogruppo di ordine di ordine $8$ è una copia di $D_4$.
+\item Se $\card{H}=12$, allora $[S_4:H] = 2$ e quindi $H$ è un sottogruppo normale di $S_4$. Gli unici sottogruppi normali di $S_4$ sono $A_4$ e $V_4$. L'unica possibilità però è $A_4$ perché tra i due è quello che ha cardinalità $12$. \qedhere
+\end{itemize}
+\end{proof}
+
+
+%\section{Classi di coniugio di permutazioni}
+%\section{Semplicità di $A_n$}
+
+\begin{osse}
+$H,K<G$ $\implies$ $[H:H\cap K]\le[G:K]$ perché la funzione
+\[
+H/(H\cap K)\to G/K \,,\ a(H\cap K)\mapsto aK
+\]
+è (ben definita e) iniettiva. In particolare $H<S_n$ $\implies$ $[H:H\cap A_n]\le[S_n:A_n]=2$, e quindi $[H:H\cap A_n]=2$ se $H\nsubseteq A_n$.
+\end{osse}
+
+Per ogni $\sigma\in A_n$, dato che $ C_{A_n}(\sigma)= C_{S_n}(\sigma)\cap A_n$, si ha allora
+\[
+\begin{cases} C_{A_n}(\sigma)= C_{S_n}(\sigma) & \text{se $ C_{S_n}(\sigma)\subseteq A_n$} \\
+[ C_{S_n}(\sigma): C_{A_n}(\sigma)]=2 & \text{se $ C_{S_n}(\sigma)\not\subseteq A_n$},
+\end{cases}
+\]
+da cui segue (ricordando che $\card{[\sigma]_G}=[G: C_G(\sigma)]$ per $G=S_n$ o $G=A_n$, e tenendo conto che $[\sigma]_{A_n}\subseteq[\sigma]_{S_n}$)
+\[
+\begin{cases}
+\card{[\sigma]_{A_n}}=\frac{\card{A_n}}{\card{ C_{A_n}(\sigma)}}=\frac{\card{S_n}}{2\card{ C_{S_n}(\sigma)}}=\frac{\card{[\sigma]_{S_n}}}{2} & \text{se $ C_{S_n}(\sigma)\subseteq A_n$} \\
+[\sigma]_{A_n}=[\sigma]_{S_n} & \text{se $ C_{S_n}(\sigma)\not\subseteq A_n$}.
+\end{cases}
+\]
+
+%\section{Il coniugio in $A_4$}
+
+\begin{itemize}
+\item $\sigma\in V_4\setminus\{1\}$ $\implies$ $[\sigma]_{S_4}=V_4\setminus\{1\}$ $\implies$ $\card{[\sigma]_{S_4}}=3$ dispari $\implies$ $[\sigma]_{A_4}=[\sigma]_{S_4}=V_4\setminus\{1\}$.
+\item $\sigma$ $3$-ciclo $\implies$ $[\sigma]_{S_4}=\{\text{$3$-cicli}\}$ $\implies$
+\[
+8=\card{[\sigma]_{S_4}}=[S_4: C_{S_4}(\sigma)]=\frac{24}{\card{ C_{S_4}(\sigma)}}
+\]
+$\implies$ $\card{ C_{S_4}(\sigma)}=3$ $\implies$ $ C_{S_4}(\sigma)=\gen{\sigma}\subset A_4$ $\implies$ $\card{[\sigma]_{A_4}}=\card{[\sigma]_{S_4}}/2=4$ (i $3$-cicli formano dunque $2$ classi di coniugio in $A_4$).
+\item L'unico sottogruppo normale non banale di $A_4$ è $V_4$ (dunque $\nexists H<A_4$ tale che $\card{H}=6$, anche se $6\mid12=\card{A_4}$): \\
+$H \normal A_4$ $\implies$ $\card{H}\mid12$ e $H$ è unione di classi di coniugio $\implies$ $\card{H}=1+3a+4b+4c$ con $a,b,c\in\{0,1\}$ $\implies$ $a=1$ e $b=c=0$ se $1<\card{H}<12$.
+\end{itemize}
+
+
+%\section{Semplicità di $A_n$}
+
+\begin{lemm}
+Sia $H$ un sottogruppo normale di $A_n$ non banale. Se $n \ge 5$, allora $H$ contiene un $3$-ciclo.
+\end{lemm}
+
+\begin{proof}
+\nota{Vedi il Lemma 4.36 in~\cite{milne:groups}.}
+\end{proof}
+
+\begin{teor}
+$A_n$ è semplice per ogni $n \ge 5$.
+\end{teor}
+
+\begin{proof}
+$\{1\}\ne H \normal A_n$ $\implies$ per la Proposizione $\exists\sigma=(a,b,c)\in H$. \\
+$n\ge5$ $\implies$ $\exists\tau=(d,e)\in C_{S_n}(\sigma)$ (con $a,b,c,d,e$ distinti) $\implies$ $ C_{S_n}(\sigma)\not\subseteq A_n$ $\implies$
+\[
+[\sigma]_{A_n}=[\sigma]_{S_n}=\{\text{$3$-cicli}\}\subseteq H \normal A_n
+\]
+$\implies$ $A_n=\gen{\{\text{$3$-cicli}\}}<H<A_n$ $\implies$ $H=A_n$.
+\end{proof}
+\begin{coro}
+$A_5$ è semplice e $\card{A_5}=60$.
+\end{coro}
+
+
+%\section{Sottogruppi normali di $S_n$}
+
+\begin{coro}
+$A_n$ è l'unico sottogruppo normale non banale di $S_n$ per ogni $n\ge5$.
+\end{coro}
+\begin{proof}
+\begin{itemize}
+\item $H \normal S_n$ $\implies$ $H':=H\cap A_n \normal A_n$ $\implies$ $H'=\{1\}$ o $H'=A_n$.
+\item $H\subseteq A_n$ $\implies$ $H=H'$ $\implies$ $H=\{1\}$ o $H=A_n$.
+\item $H\not\subseteq A_n$ $\implies$ $[H:H']=2$ $\implies$ $\card{H}=2$ o $H=S_n$.
+\item Per assurdo $\card{H}=2$ $\implies$ $H=\{1,\tau\}$ (con $\tau\in S_n\setminus A_n$) $\implies$ $\sigma\tau\sigma^{-1}=\tau$ per ogni $\sigma\in S_n$ $\implies$ $\tau\in Z(S_n)$, assurdo perché $Z(S_n)=\{1\}$ (per ogni $n\ge3$). \qedhere
+\end{itemize}
+\end{proof}
+
+
+%\section{Dimostrazione della Proposizione}
+
+%\begin{proof}
+%Mostriamo che se $n\ge5$ e $\{1\} \ne H \normal A_n$, allora $H$ contiene un $3$-ciclo.
+%$M(\sigma):=\{i=1,\dots,n : \sigma(i)\ne i\}$ e $l(\sigma):=\card{M(\sigma)}$ per ogni $\sigma\in S_n$.
+%\begin{itemize}
+%\item $\sigma\ne1$ $\implies$ $l(\sigma)\ge2$.
+%\item $l(\sigma)=2$ $\iff$ $\sigma$ è un $2$-ciclo e $l(\sigma)=3$ $\iff$ $\sigma$ è un $3$-ciclo.
+%\item Basta dimostrare che $m:=\min\{l(\sigma) : 1\ne\sigma\in H\}=3$.
+%\item Per assurdo sia $m>3$ e sia $\sigma\in H\setminus\{1\}$ tale che $l(\sigma)=m$.
+%\item $\sigma$ pu\`o essere di una di queste due forme:
+%  \begin{enumerate}
+%  \item $\sigma=(i_1,i_2,i_3,\dots)\dots$ e $\sigma\ne(i_1,i_2,i_3)$;
+%  \item $\sigma=(i_1,i_2)(i_3,i_4)\cdots$ prodotto di trasposizioni disgiunte.
+%  \end{enumerate}
+%\item Nel caso 1 $l(\sigma)\ge5$ $\implies$ $\exists i_4,i_5\in M(\sigma)\setminus\{i_1,i_2,i_3\}$ distinti.
+%\item Nel caso 2 $\exists i_5\not\in\{i_1,i_2,i_3,i_4\}$.
+%\item $\tau:=(i_3,i_4,i_5)$ $\implies$ $\tilde{\sigma}:=\tau\sigma\tau^{-1}\in H$ e $\tilde{\sigma}\ne\sigma$ (nel caso 1 $\tilde{\sigma}(i_2)=i_4\ne i_3=\sigma(i_2)$ e nel caso 2 $\tilde{\sigma}(i_4)=i_5\ne i_3=\sigma(i_4)$).
+%\item $\sigma':=\tilde{\sigma}\sigma^{-1}\in H\setminus\{1\}$ tale che $M(\sigma')\subseteq M(\sigma)\cup\{i_5\}$, $\sigma'(i_2)=i_2$ e nel caso 2 $\sigma'(i_1)=i_1$.
+%\item $l(\sigma')<l(\sigma)=m$, assurdo. \qedhere
+%\end{itemize}
+%\end{proof}
+
+
+%\section{Esercizio}
+
+\begin{prop}
+$G$ gruppo semplice non abeliano, $H<G$ tale che $[G:H]=5$ $\implies$ $G\iso A_5$.
+\end{prop}
+
+\begin{proof}
+L'omomorfismo $L : G\to S(G/H)\iso S_5$ è iniettivo (perché $G$ è semplice e $\ker(L)\subseteq H\subsetneq G$) $\implies$ $\exists G'<S_5$ tale che $G'\iso G$ semplice non abeliano $\implies$
+\[
+n:=\card{G}=\card{G'}\mid120=\card{S_5} \,,\ \text{e} \,,\ \card{G'}\ge60
+\]
+$\implies$ $n=60$ o $n=120$. Non pu\`o essere $n=120$ (se no $G\iso G'=S_5$ non semplice) $\implies$ $n=60$ $\implies$ $[S_5:G']=2$ $\implies$ $G' \normal S_5$ $\implies$ $G\iso G'=A_5$.
+\end{proof}
+\begin{osse}
+In effetti esiste $H<A_5$ tale che $[A_5:H]=5$: per esempio $H:=\{\sigma\in A_5 : \sigma(5)=5\}\iso A_4$.
+\end{osse}

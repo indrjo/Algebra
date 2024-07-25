@@ -1,0 +1,280 @@
+% !TEX root       = ../gruppi.tex
+% !TEX program    = lualatex
+% !TEX spellcheck = it_IT
+
+\section{Orbite e stabilizzatori}
+
+\begin{defi}[Orbita di un elemento]\label{defi:Orbite}
+Su un $G$-insieme $X$ si può assegnare la relazione di equivalenza definita da
+\[x \sim y \iff \exists g \in G : y=gx .\]
+(Verificare che sia effettivamente una relazione di equivalenza!) La classe di equivalenza di $x \in X$ sotto questa relazione è il sottoinsieme
+\[ Gx:=\{gx :  g\in G\} \]
+di $X$ e si chiama {\em orbita} di $x$ rispetto all'azione di $G$.
+\end{defi}
+
+\nota{Inserire esempi di orbite delle azioni menzionate fino ad ora.}
+
+\begin{esem}
+Ricolleghiamoci all'Esempio~\ref{esem:AzioneTraslazione}, mantenendone le notazioni. Qual è l'orbita di un elemento \(a \in G\) (qui è l'{\em insieme} \(G\))? L'orbita è semplicemente \(G\): infatti
+\[\{g a \mid g \in G\} = Ga = G .\]
+\end{esem}
+
+\begin{esem}
+Richiama l'Esempio~\ref{esem:AzioneTraslazioneClassiLaterali}. L'orbita di \(H \in G/H\) è \(G/H\) stesso.
+\end{esem}
+
+%\begin{osse}
+%Un sottoinsieme di un $G$-insieme è $G$-stabile se e solo se è unione (necessariamente disgiunta) di orbite.
+%\end{osse}
+
+\begin{defi}[Azioni transitive]
+Un'azione di $G$ su $X$ è {\em transitiva} se $X$ è costituito da una sola orbita. Si dice anche che $X$ è un $G$-insieme {\em omogeneo}.
+\end{defi}
+
+\begin{esem}
+Se $H<G$, il $G$-insieme $G/H$ (vedi l'Esempio~\ref{esem:AzioneTraslazioneClassiLaterali}) è omogeneo: infatti gli elementi della famiglia $G/H$ sono della forma $gH$ per $g \in G$.
+\end{esem}
+
+\begin{esem}
+Rispetto all'azione per coniugio di $G$ su se stesso, l'orbita di $a \in G$ è la classe di coniugio di $a \in G$ è il sottoinsieme
+\[[a]_G := \{gag^{-1} : g \in G\} .\]
+Se si può sottintendere $G$ senza creare problemi, scriviamo semplicemente $[a]$. Si ha $[a] = \{a\}$ se e solo se $a \in Z(G)$. Dunque l'azione è transitiva se e solo se $G$ è banale.  Avremo presto modo di capire quanto è importante la relazione di coniugio.
+\end{esem}
+
+
+%\section{Stabilizzatori, azioni libere e fedeli}
+
+\begin{defi}
+Se $X$ è un $G$-insieme, lo {\em stabilizzatore} di $x\in X$ è
+\[
+\Stab(x):=\{g\in G :  gx=x\} .
+\]
+In altri termini, lo stabilizzatore di \(x\) è l'insieme dei $g \in G$ che tengono fisso $x$.
+\end{defi}
+
+\begin{prop}
+Se $X$ è un $G$-insieme, allora $\Stab(x)$ è sottogruppo di $G$ per ogni $x \in X$.
+\end{prop}
+
+\begin{proof}
+$1 \in \Stab(x)$. Verifichiamo che se $g,h \in \Stab(x)$ allora $gh^{-1}\in\Stab(x)$. Infatti
+\[
+(gh^{-1})x=(gh^{-1})(hx)=g((h^{-1}h)x)=gx=x .\qedhere
+\]
+\end{proof}
+
+\begin{defi}
+Un'azione di $G$ su $X$ è {\em libera} qualora $\Stab(x)=\{1\}$ per ogni $x\in X$, ovvero se per ogni $x \in X$ si ha
+\[
+gx = x \implies g = 1 .
+\]
+Un'azione di $G$ su $X$ è {\em fedele} quando $\Stab(x)=\{1\}$ per ogni $x\in X$ si ha
+\[
+\bigcap_{x\in X}\Stab(x)=\{1\} .
+\]
+\end{defi}
+
+Ovviamente ogni azione libera è fedele.
+
+\begin{osse}
+Se l'azione è assegnata come omomorfismo di gruppi $\phi : G\to S(X)$, allora
+\[\ker \phi = \bigcap_{x\in X}\Stab(x). \]
+In tal caso, l'azione è libera se e solo se l'omomorfismo è iniettivo.
+\end{osse}
+
+\begin{esem}[Centralizzatore di un elemento]
+Lo stabilizzatore di $a\in G$ rispetto all'azione per coniugio è il sottogruppo
+\[ C_G(a):=\{g\in G : gag^{-1}=a\}=\{g\in G : ga=ag\} \]
+e viene chiamato {\em centralizzatore} o ({\em centralizzante}) di $a$ in $G$. Anche in questo caso, se non si creano problemi, abbandoniamo il pedice e scriviamo $C(a)$. Poiché $ C(1)=G$, l'azione per coniugio è libera se e solo se $G=\{1\}$. D'altra parte l'azione è fedele se e solo se
+\[ \{1\}=\bigcap_{a\in G} C(a) = Z(G) . \]
+Dunque l'azione per coniugio è fedele ma non libera se $G \ne \{1\}$ e $Z(G) = \{1\}$ (per esempio, se $G = S_3$).
+\end{esem}
+
+\begin{esem}[Normalizzatore di un sottogruppo]
+Considerando $\parti(G)$ come un $G$-insieme con l'azione indotta dal coniugio (\enquote{indotta} nel senso dell'Esempio~\ref{esem:AzioneIndottaSulleParti}), lo stabilizzatore di un sottogruppo $H$ di $G$ è il sottogruppo
+\[ N_G(H):=\{g\in G :  gHg^{-1}=H\} \]
+detto {\em normalizzatore} o ({\em normalizzante}) di $H$ in $G$. Anche qui, se non ci sono problemi, scriviamo $N(G)$. $ N(H)$ ha questo proprietà:
+\begin{itemize}
+\item $H \normal N(H) < G$;
+\item Se $H \normal K < G$, allora $K \subseteq N(H)$.
+\end{itemize}
+A parole: $N(H)$ è il più grande dei sottogruppi di $G$ che ha come sottogruppo normale $H$. In particolare $ N(H) = G$ se e solo se $H \normal G$.
+\end{esem}
+
+\begin{prop}
+Se $X$ è un $G$-insieme, per ogni $g\in G$ e per ogni $x\in X$
+\[
+\Stab(gx)=g\Stab(x)g^{-1}.
+\]
+In particolare $\Stab(gx)\iso\Stab(x)$.
+\end{prop}
+\begin{proof}
+Mostriamo che $\Stab(gx) \subseteq g\Stab(x)g^{-1}$. Sia $h\in\Stab(gx)$. Allora $gx=hgx$, da cui segue che $x=g^{-1}gx=g^{-1}hgx$, ovvero $h=gh'g^{-1}\in g\Stab(x)g^{-1}$. Proviamo l'inclusione opposta, $g\Stab(x)g^{-1}\subseteq\Stab(gx)$. Sia $h \in g\Stab(x)g^{-1}$, cioè $h=gh'g^{-1}$ per qualche $h' \in \Stab(x)$. Allora $hgx=gh'g^{-1}gx=gh'x=gx$, e quindi $h \in \Stab(gx)$.
+\end{proof}
+
+%\begin{esem}
+%$ C(gag^{-1})=g C(a)g^{-1}$ per ogni $g,a\in G$.
+%\end{esem}
+
+\begin{esem}
+Consideriamo l'azione di traslazione, richiama Esempio~\ref{esem:AzioneTraslazioneClassiLaterali}, e calcoliamo lo stabilizzatore di un qualsiasi elemento $aH$ di $G/H$. Per la proposizione appena dimostrata si ha $\Stab(aH) = a \Stab(H) a^{-1}$. Qui lo stabilizzatore di $H$ è facile da calcolare, cioè $\Stab(H) = \{g\in G : gH=H\} = H$. Quindi
+\[\Stab(aH) = aHa^{-1} .\]
+Ci servirà per il corollario che segue.
+\end{esem}
+
+\begin{prop}[Teorema di Cayley generalizzato]
+Sia $G$ un gruppo e $H$ un suo sottogruppo. Allora
+\[\ker\left(\begin{tikzcd}[column sep=small,cramped] G \ar["L", r] & S(G/H) \end{tikzcd}\right)=\bigcap_{g\in G}gHg^{-1}\]
+è il più grande sottogruppo normale di $G$ contenuto in $H$.
+\end{prop}
+
+\begin{proof}
+Grazie all'esempio precedente, siamo in grado di scrivere:
+\[ \ker(L)=\bigcap_{g\in G}\Stab(gH)=\bigcap_{g\in G}g\Stab(H)g^{-1}=\bigcap_{g\in G}gHg^{-1}.\]
+$\ker(L)$ è normale in $G$, in quanto nucleo di omomorfismo di gruppi, ed è dentro $H$. Resta da dimostrare che se $K \normal G$ è contenuto in $H$, allora $K \subseteq \ker(L)$:
+\[\underbrace{K = \bigcap_{g\in G}gKg^{-1}}_{K \normal G} \subseteq \bigcap_{g\in G}gHg^{-1} = \ker(L) .\qedhere\]
+\end{proof}
+
+%\begin{osse}
+Vediamo ora un'applicazione. Se $L : G \to S(G/H)$ è iniettivo, allora $G \iso \im(L) < S(G/H)$. Dunque, se $S(G/H)$ non ha sottogruppi isomorfi a $G$ e se $H$ è un sottogruppo {\em proprio} di $G$, possiamo concludere che
+\[ \{1\} \subsetneq \ker(L) \subseteq H \subsetneq G .\]
+In particolare, $G$ non è semplice, dato che $\ker(L) \normal G$.
+
+\begin{coro}
+Sia $G$ un gruppo finito. Se ha un sottogruppo proprio $H$ tale che $\card{G}\nmid[G:H]!$, allora $G$ non è semplice.
+\end{coro}
+
+\begin{proof}
+Infatti, per il teorema di Lagrange, $S(G/H)$ non può proprio contenere sottogruppi di ordine $\card G$, quindi ricadiamo nelle considerazioni fatte poc'anzi.
+\end{proof}
+
+\begin{esem}
+Sia $H<G$. Allora $G$ non è semplice in ciascuno dei seguenti casi.
+\begin{itemize}
+\item $\card{G}=36$, $\card{H}=9$: $[G:H]=4$ e $36\nmid4!=24$.
+\item $\card{G}=80$, $\card{H}=16$: $[G:H]=5$ e $80\nmid5!=120$.
+\item $\card{G}=150$, $\card{H}=25$: $[G:H]=6$ e $150\nmid6!=720$.
+\end{itemize}
+Avremo modo di applicare ciò in seguito.
+\end{esem}
+
+
+%\section{Descrizione delle orbite di un'azione}
+
+Se $G$ è un gruppo che agisce su un insieme $X$, allora l'azione si può restringere sulle orbite, cioè ad un'azione $G \times Gx \to Gx$ per $x \in X$. In questo senso diciamo che $Gx$ è un $G$-insieme. Per la proposizione che segue richiama anche l'Esempio~\ref{esem:AzioneTraslazioneClassiLaterali}.
+
+\begin{prop}\label{prop:StabilizzatoreOrbita}
+Sia $X$ un $G$-insieme. Allora per ogni $x \in X$ la funzione
+\[
+f : {G}{/}{\Stab(x)} \to Gx \,,\ a\Stab(x)\mapsto ax
+\]
+è un isomorfismo di $G$-insiemi. In particolare, se $X$ è finito e $x\in X$, allora
+\[\card{Gx} = [G:\Stab(x)] .\]
+\end{prop}
+
+Quindi le cardinalità dello stabilizzatore e dell'orbita di uno stesso elemento hanno un vincolo che può essere molto forte.
+
+\begin{proof}
+Scriviamo $\cl a$ al posto di $a \Stab(x)$.
+$f$ è ben definita, poiché se $a'=ab$ per qualche $b \in \Stab(x)$ allora $a'x=(ab)x=a(bx)=ax$. Facciamo vedere che è un morfismo di $G$-insiemi: per ogni $g,a\in G$ si ha
+\[
+f(g\cl{a})=f(\cl{ga})=(ga)x=g(ax)=gf(\cl{a}) .
+\]
+$f$ è suriettiva, dato che per ogni $a\in G$ si ha $ax=f(\cl{a})$. $f$ è anche iniettiva: se $a,a'\in G$ sono tali che $f(\cl{a})=f(\cl{a'})$, cioè $ax=a'x$, allora $a^{-1}a'\in\Stab(x)$ e quindi $\cl{a}=\cl{a'}$.
+\end{proof}
+
+
+%\begin{coro}
+%Sia $X$ un $G$-insieme. Allora per ogni $x\in X$ si ha
+%\[
+%\card{(Gx)}=[G:\Stab(x)] .
+%\]
+%\begin{enumerate}
+%\item $X$ è omogeneo se e solo se $X \iso G/H$ per qualche $H<G$.
+%\item $\card{(Gx)}=[G:\Stab(x)]$ per ogni $x\in X$.
+%\item $\card{[a]}=[G: C(a)]$ (con $[a]:=\{gag^{-1} :  g\in G\}$) per ogni $a\in G$.
+%\item $\card{[H]}=[G: N(H)]$ (con $[H]:=\{gHg^{-1} :  g\in G\}$) per ogni $H<G$.
+%\item Se $X$ è finito e $X=\coprod_{i=1}^n Gx_i$, allora
+%\[
+%\card{X}=\sum_{i=1}^n[G:\Stab(x_i)] .
+%\]
+%\item Se $G$ è un gruppo finito e $G=\coprod_{i=1}^n[a_i]$, allora
+%\[
+%\card{G}=\sum_{i=1}^n[G: C(a_i)] .
+%\]
+%allora:
+%\[
+%\card{G}=\card{Z(G)}+\sum_{i=1}^m[G: C(a_i)] .
+%\]
+%\end{enumerate}
+%\end{coro}
+
+\begin{esem}
+Quindi se, per esempio, se $G$ è un gruppo finito, allora
+%
+\begin{itemize}
+\item sotto l'azione di coniugio, si ha $\card{[a]}=[G: C(a)]$ per $a \in G$
+\item sotto l'azione di coniugio indotta sulle parti di $G$, si ha $\card{[H]}=[G: N(H)]$ per ogni sottogruppo $H$ di $G$.
+\end{itemize}
+\end{esem}
+
+\begin{teor}
+Se $X$ è un $G$-insieme finito e $X = \coprod_{i=1}^n Gx_i$ per degli $x_1$, \dots{}, $x_n \in X$, allora
+\[\card{X}=\sum_{i=1}^n[G:\Stab(x_i)] .\]
+\end{teor}
+
+\begin{eser}
+Come diventa la formula se l'azione considerata è quella dell'Esempio~\ref{esem:AzioneTraslazioneClassiLaterali}?
+\end{eser}
+
+Nel caso specifico dell'azione per coniugio la sostanza è la stessa, ma appare anche il centro e ha un nome suo.
+
+\begin{teor}[Formula delle classi]\label{teor:FormulaClassi}
+Se $G$ è un gruppo finito e $G = \coprod_{i=1}^n [a_i]$ per degli $a_1$, \dots{}, $a_m \in G \setminus Z(G)$ e degli $a_{m+1}$, \dots{}, $a_n \in Z(G)$, allora
+\[\card{G} = \card{Z(G)} + \sum_{i=1}^m[G:C(a_i)] .\]
+\end{teor}
+
+\begin{proof}
+Gli $a_{m+1}, \dots{}, a_n \in Z(G)$ hanno orbita banale, così come gli elementi di $Z(G)$: quindi possiamo concludere che $Z(G) = \{a_{m+1}, \dots{}, a_n\}$. Basta ora usare il corollario precedente.
+\end{proof}
+
+
+
+%\section{$p$-gruppi}
+
+Come si può intuire, per cardinalità particolari le cose potrebbero semplificarsi o condurre a risultati particolari.
+
+\begin{defi}
+Sia $p$ un numero primo. Un {\em $p$-gruppo} è un gruppo di ordine una potenza di $p$.
+\end{defi}
+
+\begin{prop}
+I $p$-gruppi non banali hanno centro non banale.
+\end{prop}
+
+\begin{proof}
+Sia $G$ un gruppo di cardinalità $p^n$ con $n > 0$. Per l'equazione delle classi
+\[\card{Z(G)}=\card{G}-\sum_{i=1}^m[G:C(a_i)]\]
+per degli $a_1, \dots{}, a_m \in G$ che non stanno nel centro. Qui necessariamente per ogni $i$ si ha $[G: C(a_i)]=p^{n_i}$ con $0 < n_i \le n$. In particolare $p$ divide $\card{G}$ e $p$ divide tutti i termini $[G:C(a_i)]$. Allora $p\mid\card{Z(G)}$, e quindi $Z(G) \ne \{1\}$.
+\end{proof}
+
+%\section{Sottogruppi normali di un $p$-gruppo}
+
+%\begin{lemm}
+%Un gruppo $G$ è abeliano $\iff$ $G/Z(G)$ è ciclico.
+%\end{lemm}
+%
+%\begin{proof}
+%\begin{itemize}
+%\item[$\implies$] $Z(G)=G$ $\implies$ $\cl{G}:=G/Z(G)=\{\cl{1}\}$ è ciclico.
+%\item[$\impliedby$] $\cl{G}=\gen{\cl{g}}$ (con $g\in G$) $\implies$ per ogni $a\in G$ $\exists n\in\Z$ tale che $\cl{a}=\cl{g}^n$ $\implies$ $\exists b\in Z(G)$ tale che $a=g^nb$ $\implies$ $a\in C(g)$ (perché $g,b\in C(g)$) $\implies$ $ C(g)=G$ $\implies$ $g\in Z(G)$ $\implies$ $\cl{g}=\cl{1}$ $\implies$ $\cl{G}=\gen{\cl{1}}=\{\cl{1}\}$ $\implies$ $Z(G)=G$ $\implies$ $G$ abeliano.
+%\end{itemize}
+%\end{proof}
+
+\begin{coro}\label{coro:GruppiP2}
+Sia $G$ un gruppo di ordine $p^2$, con $p$ primo. Allora $G$ è abeliano. Quindi (a meno di isomorfismo) i gruppi di ordine $p^2$ sono due: $C_{p^2}$ e $C_p \times C_p$.
+\end{coro}
+
+\begin{proof}
+Qui $\card{Z(G)}$ è $>1$ e divide $p^2$. Per il teorema di Lagrange, sono due le possibilità: $Z(G)$ ha cardinalità $p$ oppure $p^2$. Nel primo caso $\card{(G/Z(G))} = p$ e quindi il quoziente è ciclico: allora $G$ è abeliano. (Ricorda che un gruppo $G$ è abeliano se e solo se $G/Z(G)$ è ciclico.) Nel secondo caso, $G = Z(G)$ perché hanno la stessa cardinalità e sono finiti.
+\end{proof}

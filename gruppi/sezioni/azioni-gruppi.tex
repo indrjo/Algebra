@@ -1,0 +1,190 @@
+% !TEX root       = ../gruppi.tex
+% !TEX program    = lualatex
+% !TEX spellcheck = it_IT
+
+\section{Azioni di gruppi}
+
+\begin{defi}\label{defi:azioni}
+Un'{\em azione} di un gruppo $G$ su un insieme $X$ è una funzione
+\[\phi : G \times X \to X\]
+tale che:
+\begin{enumerate}[ref=(\arabic* in Definizione~\ref{defi:azioni})]
+\item  $\phi(gh, x) = \phi(g, \phi(h, x))$ per ogni $g,h \in G$ e $x \in X$ \label{item:ActionAxiom1}
+\item  $\phi(1, x) = x$ per ogni $x \in X$. \label{item:ActionAxiom2}
+\end{enumerate}
+Un $G$-{\em insieme} è il dato di un insieme $X$ e di un'azione $\phi : G \times X \to X$, e viene indicato come una coppia $(X, \phi)$. Spesso si usa la notazione moltiplicativa: spesso, al posto di $\phi(g, x)$, si usa scrivere $g \cdot x$ o addirittura $gx$ indicare l'azione di un elemento $g$ del gruppo su un elemento sull'elemento $x$ dell'insieme. A livello teorico, si riducono il numero di parentesi e possono risultare più agevoli comunque: possiamo dire \enquote{sia $X$ un $G$-insieme \dots{}} nominando solo l'insieme e senza destinare un nome specifico all'azione $G \times X \to X$ perché stiamo assumendo che lavoreremo con queste ultime notazioni.
+\end{defi}
+
+%\begin{osse}
+%La condizione \ref{item:ActionAxiom2} non è ridondante: fissato $x_0\in X$, la funzione 
+%\[G \times X \to X \,,\ (g,x) \mapsto x_0\]
+%soddisfa \ref{item:ActionAxiom1}, ma non \ref{item:ActionAxiom2} se $\card{X}>1$.
+%\end{osse}
+
+\begin{prop}[Azioni come omomorfismi]\label{prop:AzioniComeOmomorfismi}
+Sia $X$ un $G$-insieme. Allora per ogni $g \in G$ la funzione
+\[\phi(g) : X \to X \,,\ x \mapsto gx\]
+è biunivoca. In tal caso, si ha l'omomorfismo di gruppi $\phi : G\to S(X)$ tale che $\phi(g)$ manda $x$ in $gx$. Viceversa, dato un omomorfismo di gruppi $\phi : G\to S(X)$, la funzione
+\[G \times X \to X \,,\ (g,x) \mapsto \phi(g)(x)\]
+definisce un'azione del gruppo $G$ sull'insieme $X$.
+\end{prop}
+
+Quindi un'azione è una funzione $G \times X \to X$ con le proprietà della Definizione~\ref{defi:azioni} oppure un omomorfismo di gruppi $G \to S(X)$ come nella Proposizione~\ref{prop:AzioniComeOmomorfismi}. Questa proposizione mostra come si può passare da una impostazione all'altra.
+
+\begin{proof}
+A causa di~\ref{item:ActionAxiom1}, per ogni $g,h\in G$ e per ogni $x\in X$ si ha
+\[\phi(gh)(x)=(gh)x=g(hx)=\phi(g)(\phi(h)(x))=(\phi(g)\circ\phi(h))(x) \]
+quindi $\phi(gh)=\phi(g) \circ \phi(h)$. Inoltre, per~\ref{item:ActionAxiom2}, abbiamo che 
+\[\phi(1)(x)=1x=x=\id_X(x)\]
+per cui $\phi(1)=\id_X$. Così stando le cose, abbiamo
+\[\phi(g) \circ \phi\left(g^{-1}\right) = \phi\left(g^{-1}\right) \circ \phi(g) = \id_X \]
+e questo basta per dimostrare che $\phi(g)$ è biunivoca, con inversa $\phi\left(g^{-1}\right)$. Riassumendo, $\phi(g) : X \to X$ è biunivoca e $\phi(gh) = \phi(g) \circ \phi(h)$ per ogni $g, h \in G$, e tanto basto per poter introdurre un omomorfismo di gruppi
+\[\phi : G \to S(X) \,,\ g \mapsto \phi(g) .\]
+Viceversa, se $\phi : G \to S(X)$ è un omomorfismo di gruppi, allora per ogni $g,h \in G$ e per ogni $x \in X$
+\[
+(gh)x=\phi(gh)(x)=(\phi(g) \circ \phi(h))(x)=\phi(g)(\phi(h)(x))=g(hx),
+\]
+vale a dire~\ref{item:ActionAxiom1}. Inoltre $\phi(1)=\id_X$ poiché $\phi$ è omomorfismo, per cui $1x=\phi(1)(x)=\id_X(x)=x$, cioè~\ref{item:ActionAxiom2}.
+\end{proof}
+
+Ecco una lista di semplici esempi. Sottolineiamo che in questi esempi si presentano le cose in entrambe le formulazioni della definizione di azione. In ogni caso, è bene averli a mente, visto alcuni verranno riciclati per ottenere risultati raffinati come i {\scshape Teoremi di Sylow}.
+
+\begin{esem}
+L'{\em azione banale} non muove gli elementi dell'insieme, cioè quella definita da
+\[
+gx=x \quad\text{per ogni } g\in G, x\in X .
+\]
+Nella riformulazione della Proposizione~\ref{prop:AzioniComeOmomorfismi}, questa azione è l'omomorfismo $G \to S(X)$ che manda tutti di elementi di $G$ in $\id_X$.
+\end{esem}
+
+\begin{esem}\label{esem:AzioneDiApplicazione} 
+Se $G$ è un sottogruppo di $S(X)$, allora $X$ è un $G$-insieme con l'omomorfismo di inclusione $G \hookrightarrow S(X)$. Qui abbiamo dato l'azione come nella Proposizione~\ref{prop:AzioniComeOmomorfismi}. Se vogliamo l'azione così come è stata espressa nella Definizione~\ref{defi:azioni}, allora possiamo scriverla come
+\[
+\begin{aligned}
+G \times X &\to X \\ 
+(f, x) &\mapsto f(x) .
+\end{aligned}
+\]
+Quando un gruppo $G$ agisce su un insieme $X$ e $G$ è un sottogruppo di $S(X)$, allora  quando diciamo che \enquote{$X$ è un $G$-insieme} intendiamo $X$ è munito dell'azione vista nel precedente esempio. Salvo avviso contrario, ovviamente.
+\end{esem}
+
+\begin{esem}\label{esem:ComporreAzioniConOmomorfismi}
+Se $H$ è un sottogruppo di $G$, allora un $G$-insieme $X$ con un omomorfismo $\phi : G\to S(X)$ è anche un $H$-insieme con $\phi\rest{H} : H\to S(X)$. Più in generale, dato un omomorfismo di gruppi $f : G'\to G$, $X$ è anche un $G'$-insieme con $\phi \circ f : G'\to S(X)$. Vediamo come si scrive $\phi \circ f$ nell'altra veste, usando la Proposizione~\ref{prop:AzioniComeOmomorfismi}:
+\[\begin{aligned}
+\widehat{\phi \circ f} : G' \times X &\to X \\
+\left(g', x\right) &\mapsto \phi (f(g'))(x)
+\end{aligned}\]
+Se facciamo lo stesso con l'omomorfismo $\phi$, abbiamo
+\[\begin{aligned}
+\widehat\phi : G \times X &\to X \\
+(g, x) &\mapsto \phi(g)(x)
+\end{aligned}\]
+Da questo deduciamo che
+\[\widehat{\phi \circ f}\left(g', x\right) = \widehat\phi\left(f\left(g'\right), x\right) \quad\text{per ogni } g' \in G', x \in X .\]
+In diagrammi succede questo: commuta
+\[\begin{tikzcd}[row sep=tiny]
+G' \times X \ar["{\widehat{\phi \circ f}}", dr] \ar["{f \times \id_X}", dd, swap] \\
+& X \\
+G \times X \ar["{\widehat\phi}", ur, swap]
+\end{tikzcd}\]
+\end{esem}
+
+%\begin{esem}
+%Se $X$ è munito di qualche struttura (gruppo, spazio vettoriale, spazio topologico, spazio metrico, \dots) di solito è interessante vedere $X$ come $G$-insieme per qualche omomorfismo $G \to \Aut(X) < S(X)$, dove $f \in \Aut(X)$ è un \enquote{automorfismo} se preserva la struttura (isomorfismo di gruppi, isomorfismo di spazi vettoriali, omeomorfismo, isometria, \dots).
+%\end{esem}
+
+I gruppi possono anche agire su se stessi, o più precisamente sull'insieme dei propri elementi.
+
+\begin{esem}[Azione di coniugio]\label{esem:AzioneConiugio}
+Un'azione che è bene ricordare anche per il seguito è l'{\em azione di coniugio} di un gruppo $G$ su di sé, definita da
+\[
+\begin{aligned}
+G \times G &\to G \\
+(g,a) &\mapsto gag^{-1} .
+\end{aligned}
+\]
+Infatti vale~\ref{item:ActionAxiom1} perché $(gh)a(gh)^{-1}=g(hah^{-1})g^{-1}$ per ogni $g,h,a\in G$ e~\ref{item:ActionAxiom2} perché $1a1^{-1}=a$. L'immagine dell'azione espressa come omomorfismo di gruppi $G \to S(G)$ è il sottogruppo degli {\em automorfismi interni} e si indica con $\Int(G)$. Come suggerisce il nome, c'è questa relazione di inclusione tra sottogruppi:
+\[\Int(G) < \Aut(G) < S(G)\]
+dove $\Aut(G)$ è il gruppo degli {\em automorfismi} di $G$.
+\end{esem}
+
+\begin{esem}[Azione di traslazione]\label{esem:AzioneTraslazione}
+L'{\em azione per traslazione a sinistra} di $G$ su $G$ è definita da
+\[\begin{aligned}
+G \times G &\to G \\ 
+(g,a) &\mapsto ga .
+\end{aligned}\]
+Vale~\ref{item:ActionAxiom1} perché il prodotto di $G$ è associativo e~\ref{item:ActionAxiom2} perché $1$ è elemento neutro. Il corrispondente omomorfismo di gruppi $L : G\to S(G)$ è iniettivo, e questo fatto è noto come {\sc Teorema di Cayley}. Per quanto banale possa sembrare, dice che in $S(G)$ si può trovare una copia di $G$.
+\end{esem}
+
+\begin{esem}[Traslazione di classi laterali]\label{esem:AzioneTraslazioneClassiLaterali}
+Sia $H$ un sottogruppo di un qualunque gruppo $G$, e consideriamo la famiglia delle classi laterali sinistre $G/H$.\footnote{Ricordiamo che in generale c'è una biezione tra la famiglia delle classi laterali sinistre e quella delle classi laterali destre: per questa ragione, quando scriviamo $G/H$ possiamo intendere una qualsiasi di queste due famiglie. Se in più $H$ è normale, allora $gH=Hg$ per goni $g \in G$ e le due famiglie coincidono. In questo esempio, per semplicità, lo usiamo per indicare l'insieme delle classi laterali sinistre.} Abbiamo l'azione
+\[\begin{aligned}
+G \times G/H &\to G/H \\ 
+(g,hH) &\mapsto g(hH) = (gh)H
+\end{aligned}\]
+La verifica che questa è un'azione è lasciata per esercizio. Indicheremo ancora con $L : G \to S(G/H)$ il corrispondente omomorfismo di gruppi, che in generale non è iniettivo.
+\end{esem}
+
+\begin{esem}\label{esem:AzioneIndottaSulleParti}
+Un'azione di $G$ su $X$ ne induce sempre di $G$ su $\parti(X)$:
+\[\begin{aligned}
+G \times \parti(X) &\to \parti(X) \\
+(g,A) &\mapsto gA:=\{gx : x \in A\}
+\end{aligned}\]
+La verifica che questa è davvero un'azione è lasciata per esercizio.
+\end{esem}
+
+\begin{defi}
+Un sottoinsieme $A$ di un $G$-insieme $X$ è $G$-{\em stabile} o $G$-{\em invariante} se $gA=A$ per ogni $g \in G$.
+\end{defi}
+
+\begin{osse}
+Un sottoinsieme $G$-stabile di un $G$-insieme è in modo naturale un $G$-insieme per restrizione dell'azione a $G\times A$.
+\end{osse}
+
+\begin{osse}
+In realtà per verificare se un insieme è $G$-stabile è sufficiente verificare una sola inclusione: un sottoinsieme $A$ di un $G$-insieme $X$ è $G$-stabile se e solo se $gA \subseteq A$ per ogni $g \in G$. L'inclusione opposta è infatti sempre vera: per ogni $g \in G$ si ha anche (dato che $g^{-1}A \subseteq A$)
+\[A = 1A = (gg^{-1})A = g(g^{-1}A) \subseteq gA .\]
+\end{osse}
+
+%\section{Sottogruppi normali e sottogruppi caratteristici}
+
+Nel seguente esempio facciamo vedere come alcuni concetti della teoria dei gruppi possono essere ridefiniti in termini di stabilità sotto certe azioni.
+
+\begin{esem}[Sottogruppi normali e sottogruppi caratteristici]
+Sia $G$ un gruppo e $H$ un suo sottogruppo.
+\begin{itemize}
+\item Ricordiamo che $H$ è normale in $G$ se e solo se $gHg^{-1} = H$ per ogni $g \in G$. Precedentemente abbiamo incontrato l'azione di coniugio (Esempio~\ref{esem:AzioneConiugio}): è immediato quindi constatare che $H$ è un sottogruppo normale di $G$ se e solo se $H$ è un sottogruppo stabile sotto l'azione di coniugio. Abbiamo visto anche nell'Esempio~\ref{esem:AzioneDiApplicazione} che possiamo definire l'azione $\Int(G) \times G \to G$ che manda $(f, g)$ in $f(g)$. Pertanto, $H$ è un sottogruppo normale di $G$ se e solo se è un sottogruppo stabile sotto l'azione appena menzionata. 
+%\item $H$ è $G$-stabile rispetto all'azione per coniugio $\iff$ $H$ è $\Int(G)$-stabile $\iff$ $gHg^{-1}=H$ per ogni $g\in G$ $\iff$ $gHg^{-1}\subseteq H$ per ogni $g\in G$; in questo caso si dice che $H$ è {\em normale} in $G$ ($H \normal G$).
+\item Un sottogruppo $H$ di $G$ è detto {\em caratteristico} qualora $\im f = G$ per ogni $f \in \Aut(G)$. Sempre richiamando l'Esempio~\ref{esem:AzioneDiApplicazione}, possiamo introdurre l'azione $\Aut(G) \times G \to G$ che manda $(f, g)$ in $f(g)$. In questo caso, $H$ è {\em caratteristico} in $G$ se e solo se $H$ è stabile sotto questa azione.\footnote{Osserviamo che ogni sottogruppo caratteristico è normale, ma non viceversa. Per esempio, i sottogruppi non banali di $C_2^2$ sono normali ma non caratteristici.} \footnote{$H$ è caratteristico in $G$ se l'unico sottogruppo di $G$ isomorfo a $H$ è $H$ stesso. Questo succede in particolare se $H$ è l'unico sottogruppo di $G$ del suo ordine. Quindi per esempio ogni sottogruppo di un gruppo ciclico finito è caratteristico.}
+\end{itemize}
+\end{esem}
+
+%\begin{esem}
+%$H$ è caratteristico in $G$ se l'unico sottogruppo di $G$ isomorfo a $H$ è $H$ stesso. Questo succede in particolare se $H$ è l'unico sottogruppo di $G$ del suo ordine. Quindi per esempio ogni sottogruppo di un gruppo ciclico finito è caratteristico.
+%\end{esem}
+
+
+
+%\section{Morfismi di azioni}
+
+\begin{defi}[Morfismi di $G$-insiemi]
+Se $X$ e $Y$ sono $G$-insiemi, una funzione $f : X\to Y$ è un {\em morfismo} di $G$-insiemi (o di azioni di $G$) qualora 
+\[ f(gx) = gf(x) \quad\text{per ogni } g \in G, x \in X .\]
+$f$ è un {\em isomorfismo} di $G$-insiemi se è anche biunivoco.
+\end{defi}
+
+\begin{osse}
+$\id_X$ è un isomorfismo. Se $f$ è un isomorfismo, anche $f^{-1}$ lo è. La composizione di (iso)morfismi è un (iso)morfismo. Un morfismo $f : X\to Y$ è un isomorfismo se e solo se esiste un morfismo $f' : Y \to X$ tale che $f' \circ f = \id_X$ e $f \circ f' = \id_Y$. La relazione di isomorfismo è di equivalenza.
+\end{osse}
+
+\begin{esem}
+Se $A$ è un sottoinsieme $G$-stabile di un $G$-insieme $X$, l'inclusione $A \hookrightarrow X$ è un morfismo di $G$-insiemi.
+\end{esem}
+
+\begin{esem}
+Sia $G$ un gruppo e $H$ un suo sottogruppo. Supponiamo $G$ munito dell'azione di traslazione, vedi Esempio~\ref{esem:AzioneTraslazione}). Lo stesso si può fare con la famiglia di classi laterali $G/H$, ovvero richiama l'Esempio~\ref{esem:AzioneTraslazioneClassiLaterali}. La funzione 
+\[G \to G/H \,,\ a \mapsto aH\]
+è un morfismo di $G$-insiemi, ed è un isomorfismo se e solo se $H$ è banale.
+\end{esem}

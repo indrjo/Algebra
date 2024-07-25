@@ -1,0 +1,43 @@
+% !TEX root       = ../gruppi.tex
+% !TEX program    = lualatex
+% !TEX spellcheck = it_IT
+
+
+\section{Esercizi}
+
+%\begin{eser}[Gruppi di ordine 30]
+%$\card{G}=30=2\cdot3\cdot5$.
+%\begin{enumerate}
+%\item $\exists K<G$ tale che $\card{K}=15$.
+%\item $G\iso C_{15}\rtimes_{\theta}C_2$ per qualche omomorfismo $\theta : C_2\to\Aut(C_{15})$.
+%\item $G$ è isomorfo a uno e uno solo dei seguenti gruppi: \\
+%$C_{30}$, $D_{15}$, $D_3\times C_5$ e $D_5\times C_3$.
+%\end{enumerate}
+%\end{eser}
+%
+%\begin{proof}[Svolgimento]
+%\begin{enumerate}
+%\item $H_5<G$ $5$-Sylow e $H_3<G$ $3$-Sylow tali che $H_5 \normal G$ o $H_3 \normal G$ $\implies$ $K:=H_5H_3<G$ e $\card{K}=(\card{H_5})(\card{H_3})=5\cdot3=15$.
+%\item $K \normal G$ perché $[G:K]=2$ $\implies$ $G=K\rtimes H$ con $H<G$ $2-Sylow$, e basta osservare che $K\iso C_{15}$ e $H\iso C_2$.
+%\item $\Aut(C_{15})\iso\Z/15\Z^*\iso\Z/5\Z^*\times\Z/3\Z^*\iso C_4\times C_2$ $\implies$
+%\begin{gather*}
+%\card{\Hom(C_2,\Aut(C_{15}))}=\card{\Hom(C_2,C_4\times C_2)} \\
+%=\card{\{g\in C_4\times C_2 : \ord(g)\mid2\}}=4
+%\end{gather*}
+%$\implies$ ci sono al pi\`u $4$ classi di isomorfismo e basta verificare che i $4$ elencati sono a due a due non isomorfi (esercizio). \qedhere
+%\end{enumerate}
+%\end{proof}
+
+\begin{eser}
+\begin{enumerate}
+\item $\card{G}=p^3$ ($p$ primo), $G$ non abeliano $\implies$ $Z(G)=[G,G]\iso C_p$ e $G/Z(G)\iso C_p^2$.
+\item Per ogni primo $p$ esiste un gruppo non abeliano di ordine $p^3$.
+\end{enumerate}
+\end{eser}
+
+\begin{proof}[Svolgimento]
+\begin{enumerate}
+\item $G\ne\{1\}$ $p$-gruppo $\implies$ $Z(G)\ne\{1\}$ $\implies$ $[G:Z(G)]\ne p^3$. $G$ non abeliano $\implies$ $G/Z(G)$ non ciclico $\implies$ $[G:Z(G)]\ne1,p$. Dunque $[G:Z(G)]=p^2$ $\implies$ $G/Z(G)\iso C_p^2$ abeliano $\implies$ $[G,G]<Z(G)\iso C_p$ semplice. $G$ non abeliano $\implies$ $[G,G]\ne\{1\}$ $\implies$ $[G,G]=Z(G)$.
+\item $\exists\theta : C_p\to\Aut(C_{p^2})$ omomorfismo non banale (perché $p\mid\card{\Aut(C_{p^2})}=\card{\Z/p^2\Z^*}=p(p-1)$) $\implies$ $G:=C_{p^2}\rtimes_{\theta}C_p$ non abeliano tale che $\card{G}=(\card{C_{p^2}})(\card{C_p})=p^2p=p^3$. \qedhere
+\end{enumerate}
+\end{proof}

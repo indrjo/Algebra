@@ -1,0 +1,415 @@
+% !TEX root       = ../gruppi.tex
+% !TEX program    = lualatex
+% !TEX spellcheck = it_IT
+
+\section{Prodotto semidiretto}
+
+\begin{defi}[Prodotto semidiretto di sottogruppi]\label{defi:SemidirettoSottogruppi}
+Sia $G$ un gruppo e $H < G$ e $N \normal G$. Diciamo che $G$ è {\em prodotto semidiretto} dei sottogruppi $N$ e $H$ qualora
+\begin{align*}
+& H \cap N = \{1\} \\
+& HN = G
+\end{align*}
+In tal caso, si scrive $G = N \rtimes H$ oppure $G = H \ltimes N$.
+\end{defi}
+
+\begin{osse}
+Se nella Definizione~\ref{defi:SemidirettoSottogruppi} anche $H \normal G$, allora 
+\[H \ltimes N \iso H \times N\]
+e si può dire anche che $G$ è {\em prodotto diretto} di $H$ e $N$. Vedi il Richiamo~\ref{rich:ProdottoSottogruppi}.
+\end{osse}
+
+Ecco un lista di semplici esempi, ma comunque utile per battere il terreno.
+
+\begin{esem}
+Il gruppo diedrale 
+\[D_n = \gen{r, s \mid r^n = 1, s^2 = 1, (sr)^2 = 1}\]
+ha due sottogruppi ciclici, $\gen{r}$ e $\gen{s}$, dei quali il primo è sicuramente normale. \nota{Inserire la verifica di questo fatto?} Osserviamo che si intersecano banalmente (ricorda che $n \ge 3$) e $\gen r \gen s$ è un sottogruppo di $D_n$ che ha $2n$ elementi, come $D_n$. (Vedi il Richiamo~\ref{rich:ProdottoSottogruppi}.) Pertanto possiamo concludere che
+\[D_n = \gen r \rtimes \gen s .\]
+\end{esem}
+
+\begin{esem}
+Sia $G$ un gruppo di ordine $pq$, con $p$ e $q$ primi tali che $p < q$. Per la Proposizione~\ref{prop:GruppiPQ}, questo gruppo ha qualche sottogruppo di Sylow di ordine $p$ e uno solo di ordine $q$ che è anche normale. Indichiamoli con $H_p$ e $H_q$ rispettivamente. Questi due sottogruppi si intersecano banalmente e $H_pH_q$ è un sottogruppo di $G$ che ha la stessa cardinalità di $G$. (Vedi il Richiamo~\ref{rich:ProdottoSottogruppi}.) Anche in questo caso,
+\[G = H_q \rtimes H_p .\]
+\end{esem}
+
+Gli esempi appena illustrati sono un'importante occasione: se $p \ge 3$ è primo, allora $D_p$ e $C_{2p}$ sono il prodotto semidiretto sottogruppi che sono isomorfi a $C_2$ e a $C_p$, ma $D_p \niso C_{2p}$ ($C_{2p}$ ha qualche elemento di ordine $2p$ mentre $D_p$ no). È una delle ragioni che ci porterà a introdurre il concetto di prodotto semidiretto \enquote{esterno}.
+
+\begin{esem}
+Sappiamo che gli elementi di $S_n$ si possono decomporre in trasposizioni e che gli elementi di $A_n$ si possono decomporre in un numero {\em pari} di trasposizioni. Non è difficile verificare che, presa una qualsiasi trasposizione $\sigma \in S_n$, si ha $\gen \sigma A_n = S_n$. Infatti, se $\phi \in A_n$, allora $\phi \in \gen \sigma A_n$; se invece, $\phi \in S_n \setminus A_n$, allora $\sigma \phi \in A_n$ e pertanto $\phi = \sigma \sigma \phi \in \gen \sigma A_n$. I due sottogruppi $\gen\sigma$ e $A_n$ si intersecano banalmente e $A_n$ è pure normale (da definizione $A_n$ è il nucleo di un certo omomorfismo). Pertanto $S_n = A_n \rtimes \gen{\sigma}$.
+\end{esem}
+
+\begin{esem}
+Se guardiamo $S_4$ come un sottogruppo di $S_4$ (ad esempio lo identifichiamo con $\{\sigma\in S_4 : \sigma(4)=4\} < S_4$), allora $S_4=V_4\rtimes S_3$ e $A_4=V_4 \rtimes A_3$.
+\end{esem}
+
+%\begin{esem}
+%Riprendiamo la Proposizione~\ref{prop:GruppiPQ}. Se $G$ è un gruppo tale che $\card{G}=pq$ con $p<q$ primi, allora  $G$ è il prodotto semidiretto di due sottogruppi ciclici: più precisamente, $G = N \rtimes H$ con $H\iso C_p$ e $N\iso C_q$.
+%\end{esem}
+
+%\section{Condizioni equivalenti}
+
+%Esistono modi equivalenti di introdurre il prodotto semidiretto della Definizione~\ref{defi:SemidirettoSottogruppi}.
+
+\begin{prop}\label{prop:SemidirettoSottogruppiEquivalenti}
+Sia $G$ un gruppo e $H < G$ e $N \normal G$. Indichiamo con $i : H \hookrightarrow G$ l'inclusione e con $\pi : G \to G/N$ la proiezione al quoziente. Allora sono equivalenti:
+%$N \normal G$, $\pi : G\to G/N$ proiezione $\implies$ sono equivalenti:
+\begin{enumerate}
+\item $G = N \rtimes H$.
+\item $\pi \circ i : H\to G/N$ è un isomorfismo.
+\item Esiste $f : G \to H$ tale che $\ker f = N$ e $f \circ i = \id_H$.
+\end{enumerate}
+\end{prop}
+
+\nota{Leggere anche \href{https://en.wikipedia.org/wiki/Semidirect\_product\#Inner\_semidirect\_product\_definitions}{Wikipedia}.}
+In sostanza, ($1 \implies 2$) risponde alla domanda: che cos'è $\frac{N \rtimes H}{N}$? È proprio $H$ sotto un preciso isomorfismo. Mentre ($3 \implies 1$) ci dice che un omomorfismo $f : G \to H$ che fissa gli elementi di $H$ permette di scrivere $G$ come un prodotto semidiretto: $G = \ker f \rtimes H$.
+
+\begin{esem}
+Per ritornare ad uno dei nostri primi esempi, consideriamo l'omomorfismo
+\[f : D_n \to \gen s\]
+che manda $s^jr^k$, per $j \in \{0, 1\}$ e $k \in \{0, \dots{}, n-1\}$, in $s^j$. (Verificare che questo è effettivamente un omomorfismo!) Questo omomorfismo tiene fissi gli elementi di $\gen s$ è il suo nucleo è chiaramente $\gen r$. Abbiamo quindi riprovato in un'altra maniera che $D_n = \gen r \rtimes \gen s$.\newline
+Un altro modo per ottenere lo stesso risultato è di calcolare esplicitamente ${D_n}{/}{\gen r}$: le classi laterali sono due, $\gen r$ e $s \gen r$, ed è evidente che
+\[\gen s \to {D_n}{/}{\gen r}\,,\ s^j \to s^j \gen r\]
+è un isomorfismo.
+%\[s^jr^k \gen r = s^j \gen r \quad \text{per $j \in \{0, 1\}$ e $k \in \{0, \dots{}, n-1\}$}\]
+\end{esem}
+
+\begin{eser}
+Riprovare a riformulare altri esempi nello spirito della Proposizione~\ref{prop:SemidirettoSottogruppiEquivalenti}.
+\end{eser}
+
+\begin{proof}[Dimostrazione della Proposizione~\ref{prop:SemidirettoSottogruppiEquivalenti}]
+($1 \Rightarrow 2$) Mostriamo che $\pi \circ i$ è iniettivo: se $h N = N$ con $h \in H$, allora $h \in N$, e che quindi $h = 1$ perché $H$ e $N$ si intersecano banalmente. Proviamo che $\pi \circ i$ è suriettivo: poiché $G = HN$, allora ogni elemento di $G/N$ può essere scritto come $h N$.\newline
+($2 \Rightarrow 3$) Poiché $\pi \circ i$ è un isomorfismo, possiamo considerare l'omomorfismo $f : G \to H$ ottenuto componendo gli omomorfismi
+\[\begin{tikzcd}[cramped] G \ar["\pi", r] & G/N \ar["{(\pi \circ i)^{-1}}", r] & H \end{tikzcd}\]
+Qui $1 = f(x) = (\pi \circ i)^{-1} \circ \pi (x)$ se e solo se $\pi(x) = \pi \circ i (1) = N$, ovvero $x \in N$. Infine $f \circ i = \id_H$ per come è definito $f$.\newline
+($3 \Rightarrow 1$) Per il {\scshape Primo Teorema di Isomorfismo}, esiste un unico omomorfismo $g$ per cui commuta il diagramma
+\[\begin{tikzcd}[column sep=tiny]
+G \ar["\pi", dr, swap] \ar["f", rr] & & H \\
+& G/N \ar["g", ur, swap]
+\end{tikzcd}\]
+Qui $g$ è un isomorfismo perché $f$ è suriettivo. Osserviamo che $g(hN) = f(h) = h$ per ogni $h \in H$ e quindi le classi laterali $hN$ al variare di $h \in H$ bastano per formare una partizione di $G$. Da questa considerazione è immediata la verifica delle condizioni per essere prodotto semidiretto.
+\end{proof}
+
+Quello che abbiamo appena visto è il prodotto semidiretto \enquote{interno}. Si può fare in generale il prodotto semidiretto di due gruppi non necessariamente sottogruppi di un unico gruppo. Questo richiede un po' di attenzione preliminare.
+
+\begin{lemm}
+Siano $H$ e $N$ due gruppi e $\theta : H \to \Aut(N)$ un omomorfismo. Allora l'operazione
+\begin{align*}
+& \bullet_\theta : (N \times H) \times (N \times H) \to (N \times H) \\
+& (n_1, h_1) \bullet_\theta (n_2, h_2) := (n_1 \theta_{h_1}(n_2), h_1 h_2)
+\end{align*}
+è associativa, $(1_N, 1_H)$ è l'identità e l'inverso di $(a, b)$ è $\left(\theta_{b^{-1}}\left(a^{-1}\right), b^{-1}\right)$.
+\end{lemm}
+
+\begin{proof}
+\nota{Da scrivere.}
+\end{proof}
+
+\begin{defi}[Prodotto semidiretto di gruppi]\label{defi:SemidirettoEsterno}
+Siano $H$ e $N$ due gruppi e $\theta : H \to \Aut(N)$ un omomorfismo. Il {\em prodotto semidiretto} di $N$ e $H$ rispetto a $\theta$ è il gruppo denotato con $N \rtimes_\theta H$ oppure $H \ltimes_\theta N$ ed è dato dall'insieme $N \times H$ con l'operazione \(\bullet_\theta\) introdotta nel Lemma precedente. Per comodità e quando non crea ambiguità, ci dimenticheremo spesso del simbolo $\bullet_\theta$ e moltiplicheremo due elementi $(a_1, b_1)$ e $(a_2, b_2)$ di $N \rtimes_\theta H$ scrivendo semplicemente $(a_1, b_1) (a_2, b_2)$.
+\end{defi}
+
+Quindi $N \rtimes_\theta H$ è $N \times H$ ma munita di un'operazione da quella del classico prodotto diretto.
+
+\begin{esem}
+Partiamo nell'esplorazione di questo nuovo oggetto col caso più banale: $\epsilon : H \to \Aut(N)$ è l'omomorfismo banale, cioè $\epsilon_h = \id_N$ per ogni $h \in H$. Quindi il prodotto semidiretto è un semplice prodotto diretto:
+\[N \rtimes_\epsilon H = N \times H .\] 
+\end{esem}
+
+\begin{esem}[Gruppo diedrale come prodotto semidiretto]\label{esem:GruppoDiedraleComeSemidiretto}
+Sia $n \ge 2$ e scriviamo $r$ un generatore di $C_n$ e $s$ un generatore di $C_2$. Cos'è $C_n \rtimes_\rho C_2$ con $n \ge 3$ e dove $\rho : C_2 \to \Aut(C_n)$ è l'omomorfismo tale che $\theta_s : C_n \to C_n$ manda un elemento nel suo inverso? Da definizione, gli elementi di $C_n \rtimes_\rho C_2$ sono quelli di $C_n \times C_2$, cioè delle forma 
+\[(r^j, s^k) \quad\text{per } j \in \{0, \dots, n-1\} \text{ e } k \in \{0, 1\},\]
+ma l'operazione è diversa da quella di del classico prodotto diretto! Verifichiamo che si tratta del gruppo diedrale $D_n$, ovvero che è isomorfo, verificando le relazioni~\ref{diedrale:regolaR}, \ref{diedrale:regolaS} e~\ref{diedrale:regolaSR}:
+\begin{align*}
+& (r, 1)^n = 1 \\
+& (1, s)^2 = 1 \\
+& (r, s)^2 = \left(r \rho_s(r), s^2\right) = \left(rr^{-1}, 1\right) = 1
+\end{align*}
+Qui $(r, 1)$ è nel ruolo di $r$ e $(1, s)$ nel ruolo di $s$ del Richiamo~\ref{rich:GruppoDiedrale}, e in generale $(r^k, s^j)$ riveste il ruolo di $s^jr^k$. %Questo infatti un modo equivalente di definire il gruppo diedrale, se si conosce prima il prodotto semidiretto.
+\end{esem}
+
+Osservare il notevole balzo in avanti. Scrivere che $D_n = \gen r \rtimes \gen s$ significa dire ha dei sottogruppi che combinati in qualche modo danno $D_n$ stesso. Tuttavia questo è un fatto di un oggetto, $D_n$, già introdotto a monte. Invece $C_n \rtimes_\rho C_2$ è proprio un gruppo costruito con il solo ausilio di $C_2$ e $C_n$ e un particolare morfismo $C_2 \to \Aut(C_n)$ e che potrebbe essere anche preso come definizione di $D_n$. Il vantaggio sulla definizione data nel Richiamo~\ref{rich:GruppoDiedrale} potrebbe essere che $C_n \rtimes_\rho C_2$ ha subito dichiarata in maniera esplicita l'operazione di cui è dotata.
+
+ %Ricordiamo infatti che un omomorfismo $\theta : C_n \to \Aut(N)$ è univocamente determinato una volta che è prescritto l'immagine di uno dei generatori di $C_n$. Una sotto-classe notevole di quella appena menzionata è quella dei prodotti semidiretti \(C_n \rtimes_\theta C_m\).
+
+\begin{rich}
+Una classe importante di prodotti semidiretti è formato da quelli della forma $N \rtimes_\theta C_n$, dove $n$ spesso e volentieri è un numero primo. E spesso e volentieri, anche $N$ è ciclico. E, se così è, bisogna farsi qualche idea di $\Aut(N)$. A tal proposito, ricordiamo un risultato di {\scshape Algebra 1}:
+%\[\Aut(\Z/n\Z) \iso \Z/n\Z^* \text{ per ogni } n \ge 1 .\]
+\[\Aut(C_n) \iso \Z/n\Z^* \text{ per ogni } n \ge 1 .\]
+L'omomorfismo che realizza questo isomorfismo è
+\[\Z/n\Z^* \to \Aut(C_n) \,,\ \bar k \mapsto \lambda g. g^k .\]
+(Ricordiamo che $\bar k \in \Z/n\Z^*$ se e solo se $\mcd(n, k) = 1$.) Questo ci dice anche esplicitamente quali sono gli elementi di $\Aut(C_n)$.
+%\[\Aut(\Z/n\Z) \to \Z/n\Z^* \,,\ \alpha \mapsto \alpha(1) .\]
+%Forse è più interessante la sua inversa
+%\[\Z/n\Z^* \to \Aut(\Z/n\Z) \,,\ \bar k \mapsto \lambda g. \bar k g .\]
+%è un isomorfismo.
+%\begin{itemize}
+%\item Anzitutto $f$ è ben definita, cioè che se $\alpha \in \Aut(\Z/n\Z)$, allora $f(\alpha) = \alpha\left(\cl 1\right)$ è invertibile. Poiché $\alpha$ è isomorfismo, abbiamo l'inversa $\alpha^{-1}$ e 
+%\[\alpha\left(\cl 1\right) \alpha^{-1}\left(\cl 1\right) = \alpha^{-1}\left(\alpha\left(\cl 1\right)\right) = \cl 1 .\]
+%% l'ordine di $\alpha\left(\cl 1\right)$ è lo stesso di $\cl 1$, e quindi $\alpha\left(\cl{1}\right)$ è invertibile.
+%\item Trattandosi di gruppi finiti, per verificare che $f$ è biunivoca è sufficiente vedere che iniettiva. L'unico omomorfismo $\Z/n\Z \to \Z/n\Z$ che manda $\cl 1$ in $\cl 1$ è proprio l'identità.
+%\item $f$ è un omomorfismo perché per ogni $\alpha,\beta\in\Aut(\Z/n\Z)$, se $f(\alpha)=\alpha(\cl{1})=\cl{a}$ e $f(\beta)=\beta(\cl{1})=\cl{b}$, allora
+%\[
+%f(\alpha\circ\beta) = \alpha\left(\beta\left(\cl 1\right)\right) = \beta\left(\cl 1\right)\alpha\left(\cl 1\right) = \alpha\left(\cl 1\right)\beta\left(\cl 1\right) = f(\alpha)f(\beta). \qedhere
+%\]
+%\end{itemize}
+%$\Aut\left(C_2^2\right) \iso S_3$: è infatti facile vedere che ogni permutazione di $C_2^2$ che lascia fisso l'elemento neutro è un automorfismo.
+Inoltre ricordiamo che se $m$ e $n$ sono coprimi, allora
+\[\Aut(C_m \times C_n) \iso \Aut(C_m) \times \Aut(C_n) .\]
+%Inoltre ricordiamo che per $p$ primo si ha che $\Aut(C_p)$ è ciclico.
+\end{rich}
+
+\begin{esem}[Presentazione dei gruppi $C_n \rtimes_\theta C_m$]\label{esem:PresentazioneSemidirettoGruppiCiclici}
+Abbiamo i due gruppi ciclici \(C_m\) e \(C_n\), i cui generatori sono \(a\) e \(b\) rispettivamente. Vogliamo avere un'idea più esplicita sui prodotti semidiretti $C_n \rtimes_\theta C_m$ con $\theta : C_m \to \operatorname{Aut}(C_n)$ omomorfismo. La presentazione che inizia con le informazioni sugli ordini degli elementi:
+\[a^m = 1 \,,\ b^n = 1 .\]
+Abbiamo richiamato poi che elementi di $\Aut(C_n)$ sono esattamente della forma
+\[\lambda g. g^k \quad\text{per ogni } 0 \le k < n \,,\ \mcd(k, n) = 1 .\]
+Poi se devo cercare gli omomorfismi $C_m \to \Aut(C_n)$ devo anche rispettare dei vincoli sugli ordini: $\left(\lambda g. g^k\right)^m = \lambda g . g^{k^m}$ deve essere l'identità, cioè deve valere anche
+\[k^m \equiv 1 \mod n .\] 
+\nota{Basta questo?} Quindi i prodotti semidiretti presentabili in questo modo:
+\[\gen{a, b \mid a^m = 1, b^n = 1, \theta_b(a) = a^k} .\]
+\end{esem}
+
+Sappiamo quindi come si presentano i prodotti semidiretti di due gruppi ciclici. Anche se a volte una presentazione può non essere la scelta più trasparente che ci sia, a volte si rincontrano certi gruppi notevoli che per presentazione si identificano immediatamente.
+
+%\begin{osse}
+%\nota{Magari espandiamo un po' questa parte.} È facile vedere che il prodotto semidiretto $G = N \rtimes_\theta H$ si può scrivere come un prodotto semidiretto nel senso della Definizione~\ref{defi:SemidirettoSottogruppi}, cioè $G \iso N'\rtimes H'$ per degli opportuni $H'$ e $N'$. Infatti basta scegliere $N' := N \times \{1\}$, che è un sottogruppo normale di $G$, e $H' := \{1\} \times H$, che è sottogruppo di $G$.
+%\end{osse}
+
+%\begin{osse}
+%$H' \normal G$ se e solo se $\theta$ è banale. %: se $\theta$ è banale, $G=N\times H$, quindi $H' \normal G$. Viceversa, se $H' \normal G$, allora per ogni $a\in N$ e per ogni $b\in H$ $(a,1)(1,b)(a,1)^{-1}=(a,b)(a^{-1},1)=(a\theta(b)(a^{-1}),b)\in H'$ $\implies$ $1=a\theta(b)(a^{-1})=a\theta(b)(a)^{-1}$ $\implies$ $\theta(b)(a)=a$ $\implies$ $\theta$ è banale.
+%\end{osse}
+
+%\begin{osse}
+%In particolare, $N\rtimes_\theta H$ abeliano se e solo se $H$ e $N$ sono abeliani e $\theta$ banale.
+%\end{osse}
+
+Rincontriamo il prodotto semidiretto di sottogruppi della Definizione~\ref{defi:SemidirettoSottogruppi}.
+
+\begin{prop}\label{prop:SemidirettoInternoComeSemidirettoEsterno}
+Siano $G$ un gruppo, $H < G$ e $N \normal G$ tali che $G = N \rtimes H$. Consideriamo anche l'omomorfismo
+\[\lambda : H \to \Aut(N)\,,\ \lambda_h(n) := h n h^{-1} .\]
+Allora $G \iso N \rtimes_\lambda H$.
+\end{prop}
+
+Questo è davvero notevole. Se di un gruppo sappiamo che è il prodotto semidiretto \enquote{interno} di due suoi sottogruppi, abbiamo lo strumento per scriverlo come prodotto semidiretto \enquote{esterno}, il che ci dà un descrizione piuttosto esplicita. \nota{Spiega perché e ritorna sull'esempio del gruppo diedrale di nuovo.}
+
+\begin{esem}[Gruppo diedrale, di nuovo]
+Riprendiamo in mano quello che avevamo detto all'inizio della sezione: $D_n = \gen r \rtimes \gen s$, che, come abbiamo già detto, questo è un fatto su un gruppo assegnato a priori. Ecco il passo che la Proposizione~\ref{prop:SemidirettoInternoComeSemidirettoEsterno} ci permette di fare: scrivere $D_n$ come $\gen s \rtimes_\rho \gen r$, dove
+\[\rho : \gen s \to \Aut \gen r \,,\ \rho_{s^j}\left(r^k\right) := s^j r^k s^{-j} .\]
+Qui $\rho_s$ è il morfismo di inversione, quindi tutto torna ed è compatibile con quando abbiamo dato $D_n$ come $C_n \rtimes_\rho C_2$ qualche esempio fa.
+\end{esem}
+
+\begin{proof}[Dimostrazione della Proposizione~\ref{prop:SemidirettoInternoComeSemidirettoEsterno}]
+Consideriamo
+\[f : N \rtimes_\lambda H \to G\,,\ f(n, h) := nh\]
+Anzitutto è un omomorfismo: presi $(n_1, h_2) , (n_2, h_2) \in N \rtimes_\lambda H$ si ha
+\begin{align*}
+f[(n_1, h_1) (n_2, h_2)] &= f\left(n_1 h_1 n_2 h_1^{-1}, h_1h_2\right) = \\
+                         &= n_1 h_1 n_2 h_1^{-1} h_1 h_2 = \\
+                         &= f(n_1, h_1) f(n_2, h_2) .
+\end{align*}
+La biettività è immediata, perché da ipotesi gli elementi possono essere scritti in maniera unica come prodotto di un elemento di $N$ e di $H$.
+\end{proof}
+
+\begin{esem}%[Gruppi di ordine $2p$, con $p \ge 3$ primo]
+Avevamo fornito una classificazione di questo risultato nella sezione sulle permutazioni, ma vogliamo rifarlo con le nuove idee appena introdotte. Sia $G$ un gruppo di ordine $2p$, con $p \ge 3$ primo. Mostriamo che
+\[G \iso C_{2p} \quad\text{oppure}\quad G \iso D_p .\]
+Per la Proposizione~\ref{prop:GruppiPQ}, $G$ ha esattamente un $p$-Sylow $N$, che quindi è normale, di ordine $p$. Ha anche qualche $2$-Sylow $H$ di ordine $2$. In ogni caso, è facile verificare che $G = N \rtimes H$. La Proposizione~\ref{prop:SemidirettoInternoComeSemidirettoEsterno} ci viene in contro:
+\[G \iso N \rtimes_\zeta H\]
+dove $\zeta : H \to \Aut(N)$, $\zeta_h (n) := hnh^{-1}$. Per comodità
+\[H := \gen{s \mid s^2 = 1} \,,\quad N := \gen{r \mid r^p = 1}\]
+Quindi: cosa fa $\zeta$? È determinato da dove viene mandato il generatore $s$, la cui immagine deve essere quindi di ordine $1$ (l'identità) oppure $2$. Nel primo caso $\zeta$ è banale e
+\[G \iso N \rtimes_\zeta H \iso N \times H .\]
+Invece, nel secondo caso l'unica possibilità è che $\zeta_s : N \to N$ sia l'omomorfismo di inversione. (Questo perché $\Aut N$ è ciclico e per ogni divisore $d$ di $\card{\Aut(N)}$ ha un unico sottogruppo di ordine $d$. Se $d = 2$, questo ovviamente implica anche l'unicità dell'elemento di ordine $2$.) Siamo quindi di nuovo al gruppo diedrale $D_p$:
+\[G \iso N \rtimes_\zeta H \iso D_p .\]
+\end{esem}
+
+\begin{esem}[Gruppi di ordine $30$]
+Vogliamo classificare un gruppo $G$ di ordine $30$.\newline
+Osservando che $30 = 2 \cdot 3 \cdot 5$, siamo nell'ambito della Proposizione~\ref{prop:GruppiPQR}: $G$ ha quindi un unico $3$-Sylow oppure un unico $5$-Sylow. Se indichiamo con $H_3$ uno dei $3$-Sylow e con $H_5$ uno dei $5$-Sylow, abbiamo quindi che uno dei due è normale in $G$. Per il Richiamo~\ref{rich:ProdottoSottogruppi}, $H_3 H_5$ è sottogruppo di $G$, e in particolare $H_3H_5 \iso C_3 C_5 \iso C_{15}$. Questo sottogruppo è anche normale perché $\left[G : H_3H_5\right] = 2$. Sia ora $H_2$ uno qualunque dei $2$-Sylow di $G$: allora si dimostra subito che $G = (H_3H_5) \rtimes H_2$. In questo caso ci viene in soccorso la Proposizione~\ref{prop:SemidirettoInternoComeSemidirettoEsterno}:
+\[G \iso (H_3H_5) \rtimes_\zeta H_2\]
+dove, al solito, $\zeta : H \to \Aut(N)$, $\zeta_h (n) := hnh^{-1}$. Abbiamo due casi.
+\begin{itemize}
+\item $\zeta$ è banale. Ne segue subito che $G \iso C_{30}$.
+\item $\zeta$ {\em non} è banale. Bisogna quindi vedere quali possono essere eventualmente gli omomorfismi non banali
+\[H_2 \to \Aut(H_3H_5) .\]
+Abbiamo visto che $H_3H_5 \iso C_{15}$ e quindi di $\Aut(H_3H_5)$ possiamo elencare esplicitamente gli elementi e selezionare solo quelli di ordine $2$:
+\[\lambda g. g^k \quad\text{per } k \in \{-4, -1, 4\} .\]
+\end{itemize}
+Quindi $G$ è isomorfo ad uno di questi gruppi così presentati (vedi Esempio~\ref{esem:PresentazioneSemidirettoGruppiCiclici}):
+\begin{align*}
+& \gen{r, s \mid r^{15} =1,  s^2 = 1, srs = r^k}
+\end{align*}
+dove con $r$ e $s$ abbiamo indicato rispettivamente i generatori di $H_3H_5$ rispettivamente. Osserviamo che per $k = -1$ riconosciamo il gruppo diedrale $D_{15}$. \nota{Riusciamo a riconoscere anche gli altri due?}
+\end{esem}
+
+Rincontreremo presto anche anche la classificazione dei gruppi di ordine $pq$, con $p, q$ primi distinti. Ma prima di fare ciò è meglio armarsi di qualche strumento che può sempre far comodo.
+
+%%\section{Dimostrazione della Definizione-Proposizione}
+%\begin{proof}
+%\begin{itemize}
+%\item L'operazione è associativa: per ogni $a,a',a''\in N$ e per ogni $b,b',b''\in H$
+%\begin{gather*}
+%((a,b)(a',b'))(a'',b'')=(a\theta(b)(a'),bb')(a'',b'') \\
+%=(a\theta(b)(a')\theta(bb')(a''),bb'b'')
+%\end{gather*}
+%\begin{gather*}
+%(a,b)((a',b')(a'',b''))=(a,b)(a'\theta(b')(a''),b'b'') \\
+%=(a \theta(b)(a'\theta(b')(a'')),bb'b'')
+%\end{gather*}
+%e le due espressioni sono uguali perché (tenendo conto che $\theta(b) : N\to N$ è un omomorfismo e che $\theta(bb')=\theta(b)\circ\theta(b')$)
+%\[
+%\theta(b)(a'\theta(b')(a''))=\theta(b)(a')\theta(b)(\theta(b')(a''))=\theta(b)(a')\theta(bb')(a'').
+%\]
+%\item L'elemento neutro è $(1,1)$ ({\em esercizio}).
+%\item $(a,b)^{-1}=(\theta(b^{-1})(a^{-1}),b^{-1})$ per ogni $a\in N$ e per ogni $b\in H$ ({\em esercizio}). \qedhere
+%\end{itemize}
+%\end{proof}
+
+%\section{Alcuni gruppi di automorfismi}
+
+%\section{Isomorfismo tra prodotti semidiretti}
+
+Vediamo qui dei criteri per dire due prodotti semidiretti $N \rtimes_\alpha H$ e $N \rtimes_\beta H$ sono isomorfi. \nota{Vedi anche i criteri proposti da~\cite{milne:groups} a pagina 49.}
+
+\begin{prop}[Isomorfismo tra prodotti semidiretti]\label{prop:IsoSemidiretti}
+Siano $H$ e $N$ due gruppi e $\theta,\eta : H \to \Aut(N)$ due omomorfismi tali che $\theta=\eta \circ \alpha$ per qualche $\alpha \in \Aut(H)$. Allora $N \rtimes_\theta H \iso N \rtimes_\eta H$.
+\end{prop}
+
+\begin{proof}
+Poiché $\alpha$ è biunivoca, anche la funzione
+\[f : N \rtimes_\theta H \to N \rtimes_\eta H \,,\ f(a,b) := (a,\alpha(b))\]
+lo è. Inoltre $f$ è un omomorfismo: per $a,a'\in N$ e $b,b'\in H$ si ha infatti
+\begin{align*}
+f[(a,b)(a',b')] &= f(a\theta_b(a'),bb') = \\ 
+                &= (a\theta_b(a'),\alpha(bb')) = \\
+                &= (a\eta_{\alpha(b)}(a'),\alpha(b)\alpha(b')) = \\
+                &= (a,\alpha(b))(a',\alpha(b')) = \\
+                &= f(a,b)f(a',b'). \qedhere
+\end{align*}
+\end{proof}
+
+La Proposizione che segue è un trucchetto che useremo qualche volta negli esempi che seguono. Risponde sostanzialmente alle domande:
+
+\begin{quotation}
+Esistono prodotti semidiretti $N \rtimes_\theta C_p$ con $p$ primo che non siano prodotti diretti? Quando? Se ce ne sono, quanti ce ne sono?
+\end{quotation}
+
+\begin{prop}
+Se $H$ e $N$ sono gruppi e $H \iso C_p$ per qualche primo $p$, allora:
+\begin{enumerate}
+\item Esiste un omomorfismo non banale $\theta : H \to \Aut(N)$ se e solo se $p$ divide $\card{\Aut(N)}$.
+\item Se $\Aut(N)$ ha un unico sottogruppo di ordine $p$, allora $N \rtimes_\theta H \iso N \rtimes_\eta H$ comunque scelti due omomorfismi non banali $\theta, \eta : H \to \Aut(N)$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\begin{enumerate}
+\item Poiché $\theta$ è un omomorfismo, le immagini degli elementi di $H \iso C_p$ che non sono l'identità hanno ordine $p$. Se $\theta$ non è banale, allora qualcuna di queste immagini deve avere ordine $p$, e quindi per il {\scshape Teorema di Lagrange} si ha che $\Aut(N)$ ha ordine multiplo di $p$. Viceversa, $\Aut(N)$ ha un sottogruppo di ordine $p$ grazie al {\scshape Teorema di Sylow I}, il quale è anche ciclico perché $p$ è primo. È facile a questo punto realizzare qualche omomorfismo iniettivo \(H \to \Aut(N)\).
+%
+\item Se $H'$ è l'unico sottogruppo di ordine $p$ di $\Aut(N)$ e $\theta, \eta$ sono non banali, allora sono iniettivi (qui è importante che $p$ sia primo) e $\im \theta = \im\eta = H'$. Dunque, se scriviamo l'inclusione $i : H' \to \Aut(N)$, esistono isomorfismi $\tilde\theta,\tilde\eta : H \to H'$ tali che $\theta = i \circ \tilde\theta$ e $\eta = i \circ \tilde\eta$. Allora $\tilde\theta = \tilde\theta \circ \alpha$ e quindi $\theta = \eta \circ \alpha$ con $\alpha := \tilde\eta^{-1} \circ \tilde{\theta} \in \Aut(H)$. \qedhere
+\end{enumerate}
+\end{proof}
+
+%\begin{esem}
+%Se $p \ge 3$ è un primo qualsiasi, allora $\Aut(C_p) \iso C_{p-1}$ e quindi sicuramente abbiamo omomorfismi $C_2 \to \Aut(C_p)$ non banali perché $p-1$ è pari. Abbiamo visto nell'Esempio~\ref{esem:GruppoDiedraleComeSemidiretto} che $D_p$ è uno di questi prodotti semidiretti. Mentre con l'omomorfismo banale $\epsilon : C_2 \to \Aut(C_p)$ si ottiene un gruppo ciclico di ordine $2p$:
+%\[C_p \rtimes_\epsilon C_2 = C_p \times C_2 \iso C_{2p} .\]
+%\end{esem}
+
+%\section{Classificazione dei gruppi di ordine $pq$}
+
+Una prima applicazione di questi due fatti è la Proposizione~\ref{prop:GruppiPQ} ridimostrata alla nuova maniera.
+
+\begin{prop}[Classificazione dei gruppi di ordine $pq$]
+Sia $G$ un gruppo di ordine $pq$, $p$ e $q$ primi tali che $p<q$. Allora
+\begin{enumerate}
+\item Se $q \nequiv 1 \mod p$, allora $G\iso C_{pq}$.
+\item Se $q \equiv 1 \mod p$, allora $G \iso C_{pq}$ oppure $G\iso C_q \rtimes_\theta C_p$ per qualche omomorfismo non banale $\theta : C_p \to \Aut(C_q)$. Inoltre $C_q\rtimes_{\theta}C_p$ non è abeliano e, a meno di isomorfismo, non dipende da $\theta$. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Usando il {\scshape Teorema di Sylow} notiamo che $G$ ha unico $q$-Sylow $N$, che è anche normale, ed un qualche $p$-Sylow che indichiamo con $H$. Sono di ordine $q$ e $p$ rispettivamente e quindi sono ciclici: ne segue subito che $G = N \rtimes H$ e quindi per la Proposizione~\ref{prop:SemidirettoInternoComeSemidirettoEsterno} abbiamo 
+\[G \iso N \rtimes_\zeta H \]
+per qualche omomorfismo $\zeta : N \to \Aut(H)$. Osserviamo che $\Aut(N) \iso C_{q-1}$, poiché $q$ è primo. Se $q \nequiv 1 \mod p$ (cioè $p$ non divide $q-1$), allora $\zeta$ è per forza di cose l'omomorfismo banale e $G \iso C_{pq}$. Se invece $q \equiv 1 \mod p$ (ovvero $p$ divide $q-1$), allora $\zeta$ ha qualche possibilità: banale oppure no. Nel primo caso $G \iso C_{pq}$. Supponiamo che non sia banale. Qui viene in aiuto la Proposizione precedente: $\Aut(N) \iso C_{q-1}$ ha esattamente un sottogruppo di ordine $p$. Quindi a meno di isomorfismi,
+\[G \iso C_q \rtimes_\theta C_p\]
+dove $\theta$ è uno qualunque degli omomorfismi non banali $C_p \to \Aut(C_q)$.
+\end{proof}
+
+
+%\section{Gruppi di ordine < 16}
+
+\begin{rich}[Gruppo $Q_8$]
+Il {\em gruppo dei quaternioni} è
+\[Q_8 := \gen{a, b \mid a^4 = 1, a^2 = b^2, bab = b^{-1}} .\]
+\end{rich}
+
+Un altro gruppo di ordine $8$ è proprio $D_4$, di cui è immediato vedere che $D_4 \not\iso Q_8$. Nell'esempio che segue vediamo come i gruppi non abeliani di ordine $8$ sono proprio questi due.
+
+\begin{esem}[Gruppi di ordine 8]
+\nota{Da completare. Alcune parti sono da riscrivere meglio pure.} Sia \(G\) un gruppo non abeliano di ordine $8$. Mostriamo che $G \iso Q_8$ oppure $G \iso D_4$.\newline
+Per il {\scshape Teorema di Lagrange}, i suoi elementi diversi dall'identità hanno ordine $2$, $4$ oppure $8$. Una prima osservazione da fare è che $G$ non può avere elementi di ordine $8$, perché questo vorrebbe dire che $G$ è ciclico e quindi abeliano. Quindi gli elementi di $G$ che non sono l'identità hanno ordine $2$ oppure $4$.\newline
+Notiamo anche che ce ne deve essere per forza qualcuno di ordine $4$. Infatti se fossero tutti di ordine $2$, avremmo che per ogni $g, h \in G$
+\[ghgh = 1 = gghh \]
+da cui segue che $gh = hg$, e cioè $G$ risulterebbe abeliano.\newline
+Chiamiamo $a$ uno degli elementi di $G$ di ordine $4$ e $K := \gen a$. Poiché $[G:K] = 2$, allora $K$ è normale in $G$. Sia $b \in G \setminus N$.\newline
+Poiché $N$ è normale, allora $b a b^{-1} \in N$ ed ha lo stesso ordine di $a$, vale a dire $4$. \nota{La coniugazione rispetta l'ordine di un elemento. Ne ho scritto?} Quindi $bab^{-1}$ è $a$ oppure $a^{-1}$. Se è $a$, allora vuole dire che $ab = ba$, e che quindi l'intero gruppo è abeliano. \nota{Riscrivere meglio.} Quindi rimane
+\[b a b^{-1} = a .\]
+Se $\ord b = 2$, allora è isomorfo a $D_4$ mentre se $\ord b = 4$, allora è $Q_8$. (Vedi le presentazioni dei gruppi premesse a questo esempio.)
+\end{esem}
+
+\begin{osse}
+Sia $G$ un gruppo non abeliano di ordine $12$. Classifichiamolo.\newline
+Per la Proposizione~\ref{prop:GruppiP2Q}, uno dei suoi sottogruppi di Sylow è normale. I suoi gruppi di Sylow sono di ordine $3$ oppure $4$. Quindi, tanto per iniziare da qualche parte, possiamo scrivere
+\[G = N \rtimes H\]
+dove $N$ è un sottogruppo di Sylow normale e $H$ è un sottogruppo di Sylow di cardinalità diversa da $N$. I $3$-Sylow sono tutti ciclici, mentre per i $4$-Sylow bisogna discuterne: hanno cardinalità $4$ e quindi possono essere $C_4$ oppure $C_2 \times C_2$.\newline
+Caso $N \iso C_4$ e $H \iso C_3$. Qui $\Aut(C_4)$ è di ordine $2$, quindi è ciclico. Allora c'è un unico omomorfismo $C_3 \to \Aut(C_4)$, quello banale. Ma allora $G$ è abeliano, e quindi questa strada è da abbandonare.\newline
+Caso $N \iso C_2 \times C_2$ e $H \iso C_3$. Allora $\Aut(C_2 \times C_2) \iso S_3$. \nota{Scrivere di questo da qualche parte!} Esiste allora un omomorfismo non banale $\theta : H \to \Aut(N)$. Inoltre, $S_3$, e quindi $\Aut(C_2 \times C_2)$, ha un solo sottogruppo di ordine $3$. \nota{Chiaro, no?} E quindi $G \iso N \rtimes_\theta H$. Possiamo concludere che $G \iso A_4$. \nota{Non ho capito perché.}\newline
+Caso $N \iso C_3$ e $H \iso C_4$. Allora $\Aut(K) \iso C_2$ e c'è un omomorfismo non banale $H \to \Aut(N)$. Ed è unico anche! In questo caso $G \iso C_3 \rtimes_! C_4$.\newline
+Rimane da prendere in esame il caso in cui $K \iso C_3$ e $H \iso C_2 \times C_2$. \nota{Qui non si è capito niente invece.}
+%\begin{itemize}
+%\item Non può essere $K \iso C_4$ e $H \iso C_3$ perché l'unico omomorfismo $C_3 \to \Aut(C_4) \iso C_2$ è quello banale.
+%\item $K \iso C_2^2$ e $H\iso C_3$ $\implies$ $G\iso C_2^2\rtimes_{\theta}C_3$ con $\theta : C_3\to\Aut(C_2^2)\iso S_3$ omomorfismo non banale. A meno di isomorfismo $G$ non dipende da $\theta$ perché $S_3$ ha un unico sottogruppo di ordine $3$. In questo caso $G\iso A_4$.
+%\item $K\iso C_3$ e $H \iso C_4$ $\implies$ $G \iso C_3 \rtimes_{\theta}C_4$ con $\theta : C_4\to\Aut(C_3)\iso C_2$ l'unico omomorfismo non banale.
+%\item $K\iso C_3$ e $H\iso C_2^2$ $\implies$ $G\iso C_3\rtimes_{\theta}C_2^2$ con $\theta : C_2^2\to\Aut(C_3)\iso C_2$ omomorfismo non banale. A meno di isomorfismo $G$ non dipende da $\theta$ perché se $\theta'$ è un altro omomorfismo non banale, $\exists\alpha\in\Aut(C_2^2)\iso S_3$ tale che $\theta=\theta'\circ\alpha$. In questo caso $G\iso D_6$.
+%\end{itemize}
+\end{osse}
+
+
+%\section{Gruppi di ordine minore di 16}
+
+%\begin{osse}[Gruppi di ordine $< 16$]
+A questo punto siamo in grado di classificare i gruppi di ordine $\le 15$: in Figura~\ref{fig:GruppiOrdineLe15} c'è un riassunto.
+%
+\begin{figure}
+\[
+\begin{array}{r|ccccc}
+n & \multicolumn{5}{c}{\text{classi di isomorfismo di gruppi di ordine $n$}} \\ \hline
+%1 & C_1 & & & & \\
+2 & C_2 & & & & \\
+3 & C_3 & & & & \\
+4 & C_4 & C_2 \times C_2 & & & \\
+5 & C_5 & & & & \\
+6 & C_6 & C_3\rtimes C_2\iso D_3 & & & \\
+7 & C_7 & & & & \\
+8 & C_8 & C_4\times C_2 & C_2^3 & C_4\rtimes C_2\iso D_4& Q_8 \\
+9 & C_9 & C_3 \times C_3 & & & \\
+10 & C_{10} & C_5\rtimes C_2\iso D_5 & & & \\
+11 & C_{11} & & & & \\
+12 & C_{12} & C_6\times C_2 & C_2^2\rtimes C_3\iso A_4 & C_3\rtimes C_2^2\iso D_6 & C_3\rtimes C_4 \\
+13 & C_{13} & & & & \\
+14 & C_{14} & C_7\rtimes C_2\iso D_7 & & & \\
+15 & C_{15} & & & &
+\end{array}
+\]
+\caption{Classificazione dei gruppi di ordine $\le 15$}
+\label{fig:GruppiOrdineLe15}
+\end{figure}
+
+%\end{osse}
+
+
+%\section{Gruppi di ordine 30}
+

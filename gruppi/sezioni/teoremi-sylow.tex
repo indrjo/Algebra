@@ -1,0 +1,222 @@
+% !TEX root       = ../gruppi.tex
+% !TEX program    = lualatex
+% !TEX spellcheck = it_IT
+
+\section{I teoremi di Sylow}
+
+\begin{teor}[Teorema di Sylow I]\label{teor:SylowI}
+Siano $G$ un gruppo finito, $p$ primo e $l > 0$ tali che $p^l$ divide $\card{G}$. Allora esiste un sottogruppo $H$ di $G$ di cardinalità $p^l$.
+\end{teor}
+
+Per la dimostrazione del teorema abbiamo bisogno di un lemma.
+
+\begin{lemm}[Teorema di Cauchy per gruppi abeliani]\label{lemm:CauchyAbeliano}
+Siano $G$ un gruppo {\em abeliano} finito e $p$ primo tali $p$ divide $\card{G}$. Allora $G$ ha qualche sottogruppo $H$ di cardinalità $p$. In particolare questo sottogruppo è ciclico, e quindi $G$ ha qualche elemento di ordine $p$.
+\end{lemm}
+
+È bene richiamare in questa sede che in ogni gruppo {\em ciclico}, per ogni divisore $d$ dell'ordine si può trovare un qualche elemento di ordine $d$. 
+
+\begin{proof}[Dimostrazione Lemma~\ref{lemm:CauchyAbeliano}]
+Procediamo per induzione su $n := \card{G}$. Il caso $n=p$ è banalmente vero. Sia quindi $n>p$. Possiamo scegliere così un $b \in G$ diverso dall'identità. I casi ora sono due:
+\begin{itemize}
+\item $p$ divide $\ord b$. In questo caso, nel sottogruppo {\em ciclico} $\gen{b}$ si può sempre trovare un sottogruppo di ordine $p$.
+\item Altrimenti, abbiamo il gruppo quoziente ${G}{/}{\gen{b}}$ che sicuramente ha ordine multiplo di $p$ e $< n$. Per induzione, ${G}{/}{\gen{b}}$ ha un sottogruppo di cardinalità $p$: questo sottogruppo sarà ciclico, ovvero generato da un qualche $a \gen{b} \in {G}{/}{\gen{b}}$ di ordine $p$. L'ordine di questo elemento divide $\ord a$. Possiamo concludere perché nel sottogruppo {\em ciclico} $\gen{a}$ si può trovare un qualche elemento di ordine $p$. \qedhere
+\end{itemize}
+\end{proof}
+
+\begin{prop}[Sottogruppi normali di un $p$-gruppo]
+Sia $G$ un gruppo di ordine $p^n$ con $p$ primo e $n \in \N$. Allora per ogni $m \in \N$ tale che $0 \le m \le n$ esiste un sottogruppo normale di $G$ di ordine $p^m$. In particolare $G$ è semplice se e solo se $n=1$ [nel qual caso, $G$ è ciclico].
+\end{prop}
+
+\begin{proof}
+Andiamo per induzione su $n$. Il caso $n=0$ è immediatamente vero. Quindi assumiamo che $n>0$; possiamo supporre anche $m>0$. Abbiamo visto poco fa che $\card{Z(G)}=p^{n'}$ con $0 < n' \le n$. Esiste $K < Z(G)$ di ordine $p$, perché $p\mid\card{Z(G)}$ e $Z(G)$ è abeliano. Poiché $K \normal G$, $G/K$ è un gruppo di ordine $p^{n-1}$. Per l'ipotesi induttiva, $G/K$ ha un sottogruppo normale di ordine $p^{m-1}$: Questo gruppo è della forma $H/K$ per qualche $H$ sottogruppo normale di $G$. La cardinalità di $H$ è $p^m$.
+\end{proof}
+
+Possiamo ora puntare a dimostrare il {\scshape Teorema di Sylow I}. Anche qui verrà impiegato il Teorema~\ref{teor:FormulaClassi}.
+
+\begin{proof}[Dimostrazione Teorema~\ref{teor:SylowI}]
+Ragioniamo per induzione sulla cardinalità $n$ di $G$. Il caso $n = p^l$ è ovvio, in quanto basta prendere il gruppo stesso. Supponiamo quindi che $n>p^l$. Per l'equazione delle classi si ha
+\[
+\card{Z(G)}=\card{G}-\sum_{i=1}^m [G: C(a_i)]
+\]
+per opportuni $a_1, \dots{}, a_m \in G$. Abbiamo quindi che $1<[G: C(a_i)] \mid n$ per ogni $i=1,\dots,m$, e in particolare quindi i centralizzatori $ C(a_i)$ sono sottogruppi propri di $G$. Sono due i casi ora.
+\begin{itemize}
+\item $p^l$ divide $\card{ C(a_i)}$ per un certo $i \in \{1, \dots{}, m\}$. Quindi, per induzione, $ C(a_i)$ ha un sottogruppo $H$ di ordine $p^l$, che è anche sottogruppo di $G$.
+\item $p^l$ non divide nessuno dei $\card{ C(a_i)}$, vale a dire $p$ divide tutti i $[G: C(a_i)]$. Ne deriva che $p$ divide $\card{Z(G)}$. Per il Teorema~\ref{lemm:CauchyAbeliano}, $Z(G)$ ha un sottogruppo $K$ di ordine $p$. Questo sottogruppo è normale in $G$ perché è abeliano. Ora il gruppo $G/K$ ha ordine multiplo di $p^{l-1}$ e $< n$: pertanto, per induzione, $G/K$ ha un sottogruppo di ordine $p^{l-1}$; questo sottogruppo è della forma $H/K$ con $H$ sottogruppo di $G$. Abbiamo terminato, perché $H$ ha ordine $p^l$.\qedhere
+\end{itemize}
+\end{proof}
+
+Una conseguenza immediata è la generalizzazione del Lemma~\ref{lemm:CauchyAbeliano} a tutta la classe dei gruppi finiti.
+
+\begin{coro}[Teorema di Cauchy]\label{coro:Cauchy}
+Siano $G$ un gruppo finito e $p$ primo tali $p$ divide $\card{G}$. Allora $G$ ha qualche sottogruppo $H$ di cardinalità $p$.
+\end{coro}
+
+Esiste un criterio che può essere comodo per verificare se un gruppo è un $p$-gruppo.
+
+\begin{coro}
+Sia $p$ un primo. Un gruppo finito è un $p$-gruppo se e solo se tutti i suoi elementi hanno ordine una potenza di $p$.
+\end{coro}
+
+\begin{proof}
+Un'implicazione è ovvia per il {\scshape Teorema di Lagrange}. Assumiamo ora che gli elementi di un gruppo finito $G$ abbiano tutti ordine una potenza di $p$. A causa sempre del {\scshape Teorema di Lagrange}, $\card G$ è multiplo di $p$. Possiamo quindi scrivere $\card G = p^r k$ con $r, k \in \N$ tali che $p$ che non divide $k$. Se $k \ne 1$, allora a causa del Corllario~\ref{coro:Cauchy} per ogni primo $q$ che divide $k$ il gruppo ha un elemento di ordine $q$. Ma $p$ e $q$ sono coprimi.
+\end{proof}
+
+%\section{Il teorema di Sylow, seconda parte}
+
+\begin{defi}
+Sia $G$ un gruppo finito, $p$ numero primo e $r,m > 0$ tali che $\card{G}=p^rm$ e $p$ non divide $m$. Un {\em $p$-sottogruppo di Sylow}, o semplicemente un {\em $p$-Sylow}, di $G$ è un qualsiasi sottogruppo di $G$ di ordine $p^r$. Si usa indicare con $s_p$ il numero di $p$-Sylow di $G$.
+\end{defi}
+
+\begin{osse}
+$s_p\ge1$ per il Teorema~\ref{teor:SylowI}.
+\end{osse}
+
+\begin{teor}[Teorema di Sylow II]\label{teor:SylowII}
+Sia $G$ un gruppo finito, $p$ primo, e $r,m > 0$ interi positivi tali che $\card{G}=p^rm$ e $p$ non divide $m$. Allora:
+\begin{enumerate}
+\item Due qualunque $p$-Sylow di $G$ sono coniugati. In particolare, $s_p = [G: N_G(H)]$ dove $H$ è un qualunque $p$-Sylow di $G$.
+\item $s_p \equiv 1 \mod p$ e $s_p$ divide $m$.
+\item Ogni $p$-sottogruppo di $G$ è contenuto in qualche $p$-Sylow di $G$.
+\end{enumerate}
+\end{teor}
+
+\textcolor{red}{[Esistono dimostrazioni più {\em simpatiche} di questo teorema: vada per quelle.]}
+
+Prima di procedere alla dimostrazione di questo risultato, richiamiamo/introduciamo qualche strumento che ci servirà poi per un Lemma.
+
+\begin{osse}[Richiami sul prodotto di sottogruppi]
+Sia $G$ un gruppo e $H$ e $K$ sue suoi sottogruppi. Possiamo introdurre l'insieme
+\[HK := \{ab :  a \in H, b \in K\}\]
+che in generale non è un sottogruppo di $G$. Elenchiamo alcune proprietà notevoli.
+\begin{enumerate}
+\item $HK$ è sottogruppo di $G$ se e solo se $HK=KH$.
+\item Se $H$ oppure $K$ è normale, allora $HK$ è un sottogruppo. Se entrambi sono normali, allora $HK$ è pure normale.
+\item La funzione
+\[f : H \times K \to G \,,\ f(a,b) := ab\]
+è un omomorfismo di gruppi se e solo se $ab=ba$ per ogni $a \in H, b \in K$. In tal caso il suo nucleo è $H\cap K$.
+\item Se $H $ e $K$ sono sottogruppi normali di $G$ e $H \cap K=\{1\}$, allora $HK \iso H \times K$.\footnote{Prova che $ab = ba$ per ogni $a \in H$ e $b \in K$ e quindi ricadi nella proprietà precedente.}
+\item \label{prop:CardinalitaIntersezione} Se $H$ e $K$ sono finiti, allora
+\[ \card{HK}=\frac{\card{H}\card{K}}{\card{H\cap K}}. \]
+\end{enumerate}
+Le prime tre proprietà sono facili da verificare. Osserviamo soltanto che l'ultima segue facilmente dal {\scshape Primo Teorema di Isomorfismo} nel caso in cui $f$ è un isomorfismo. Tuttavia questo è un fatto molto più generale. Ne diamo una dimostrazione che usa quanto trattato fino ad ora delle azioni di gruppi. (Non ce n'è il bisogno, si può fare anche senza, ma è istruttivo per chi legge.)
+%
+\begin{proof}[Dimostrazione di~\ref{prop:CardinalitaIntersezione}]
+Consideriamo questa azione di $H \times K$ su $HK$
+\[\begin{aligned}
+(H \times K) \times HK &\to HK \\ 
+((h, k), x) &\mapsto hxk^{-1} .
+\end{aligned}\]
+Calcoliamo adesso lo stabilizzatore e l'orbita di $1 \in HK$. Lo stabilizzatore è
+\[\{(h, k) \in H \times K :  h 1 k^{-1} = 1\} = \{(h, k) \in H \times K :  h = k\}\]
+mentre l'orbita è
+\[\{h 1 k^{-1} : (h, k) \in H \times K\} = HK .\]
+Per la Proposizione~\ref{prop:StabilizzatoreOrbita}, abbiamo finito.
+\end{proof}
+\end{osse}
+
+%\section{Orbite di un $p$-Sylow}
+
+Con il lemma che segue cerchiamo di capire come sono fatte le orbite di un sottogruppo sotto l'azione di coniugio indotta sulle parti di un gruppo $G$. %Richiamiamo un po' di notazioni. Se $H$ e $K$ sono sottogruppi di $G$,  
+%\[[K]_H:=\{aKa^{-1} :  a\in H\}\subseteq[K]=[K]_G .\] 
+%Osserva come $[K]_H=\{K\}$ se e solo se $H\subseteq N(K)$.
+
+\begin{lemm}
+Sia $G$ un gruppo finito e $H,K < G$ con $H$ un $p$-gruppo e $K$ un $p$-Sylow. Allora $[K]_H = \{K\}$ se e solo se $H \subseteq K$. Altrimenti $p$ divide $\card{[K]_H}$.
+\end{lemm}
+
+\begin{proof}
+Quindi $\card H = p^l$ per qualche $l \in \N$ tale che $p^l$ divide $\card G$ e $\card K = p^s$ con $s \in \N$ tale che $p^s$ divide $\card G$ e $p^{s+1}$ no.\newline
+A causa della Proposizione~\ref{prop:StabilizzatoreOrbita} abbiamo 
+\[\card{[K]_H} = \left[H:N_H(K)\right] = p^{l-s} .\]
+Quindi le possibilità per $\card{[K]_H}$ sono due: essere uguale a $1$, vale a dire $[K]_H = \{K\}$, oppure essere multiplo di $p$.\newline
+Vediamo l'altra coimplicazione. La parte immediata è che se $H \subseteq K$, allora l'orbita $[K]_H$ è banale. Proviamo che se $[K]_H = \{K\}$, allora $H \subseteq K$. Osserviamo che $[K]_H = \{K\}$ se e solo se $H \subseteq N_H(K)$. Quindi cerchiamo di mostrare che se $H \subseteq N(K)$, allora $H \subseteq K$. Qui $H < N(K)$ e $K \normal N(K)$ (da definizione di normalizzatore) e quindi $HK < N(K) < G$, vedi richiamo fatto poco sopra. Il sottogruppo $H' := H \cap K$ è tale che $\card{H \cap K}=p^{l'}$, con $l'\le l$. Allora, sempre per il richiamo sopra,
+\[ \card{HK}=\frac{\card{H}\card{K}}{\card{H \cap K}}=\frac{p^lp^s}{p^{l'}}=p^{s+l-l'} \mid \card{G}=p^s m .\]
+Poiché $HK$ è un sottogruppo di $G$ e $p^s$ è la massima potenza di $p$ che divide $\card G$, allora $s+l-l'\le s$, e cioè $l' \le l$. Dobbiamo quindi concludere che $H \cap K = H$, ovvero l'inclusione $H \subseteq K$.
+\end{proof}
+
+\begin{proof}[Dimostrazione Teorema~\ref{teor:SylowII}]
+Sia $H$ un $p$-Sylow di $G$ di ordine $p^s$. Se $K \in [H]_G$, allora $[K]_H \subseteq [K]_G=[H]_G$. Per il Lemma precedente, $[K]_H = \{K\}$ se e solo se $H \subseteq K$. Ma $H=K$, perché $\card{H}=\card{K}$. Altrimenti $p$ divide $\card{[K]_H}$. Ne segue che
+\[ \card{[H]_G} \equiv 1 \mod p. \]
+Sia ora $H'<G$ un $p$-gruppo: analogamente a prima $[K]_{H'}\subseteq[K]_G=[H]_G$ per ogni $K\in[H]_G$, e per il Lemma $p\mid\card{[K]_{H'}}$ se $H'\nsubseteq K$. Ne segue che $\exists K\in[H]_G$ tale che $H'\subseteq K$ (altrimenti $p\mid\card{[H]_G}\equiv1\mod p$). \\
+Ci\`o dimostra sia il punto 1 che il punto 3. Si ha inoltre
+\[
+s_p=\card{[H]_G}=[G: N(H)]\mid[G:H]=m
+\]
+e $s_p\equiv1\mod p$, il che dimostra anche il punto 2.
+\end{proof}
+
+
+%\section{Un teorema di classificazione}
+
+\begin{osse}
+Il {\scshape Teorema di Sylow II} esprime anche $s_p$ in funzione del normalizzante $N_G(H)$ di un qualsiasi $p$-Sylow $H$ di $G$. Ne segue che $H$ è normale in $G$ se e solo se $s_p = 1$.
+%Se $H<G$ è un $p$-Sylow, allora
+%\[
+%H \normal G\iff H\text{ caratteristico in }G\iff s_p=1.
+%\]
+%\`E infatti chiaro che $s_p=1$ $\implies$ $H$ caratteristico in $G$ $\implies$ $H \normal G$. D'altra parte, $H \normal G$ $\implies$ $ N(H)=G$, quindi $s_p=[G: N(H)]=1$.
+\end{osse}
+
+\begin{rich}[Prodotto di sottogruppi]\label{rich:ProdottoSottogruppi}
+Sia $G$ un gruppo e $H$ e $K$ sue suoi sottogruppi. Possiamo introdurre l'insieme
+\[HK := \{ab :  a \in H, b \in K\}\]
+che in generale non è un sottogruppo di $G$. Elenchiamo alcune proprietà notevoli.
+\begin{enumerate}
+\item $HK$ è sottogruppo di $G$ se e solo se $HK=KH$. Se $H$ oppure $K$ è normale, allora $HK$ è un sottogruppo. Se entrambi sono normali, allora $HK$ è pure normale.
+\item La funzione
+\[f : H \times K \to G \,,\ f(a,b) := ab\]
+è un omomorfismo di gruppi se e solo se $ab=ba$ per ogni $a \in H, b \in K$. In tal caso, $\ker f = H\cap K$.
+\item Se $H $ e $K$ sono sottogruppi normali di $G$ e $H \cap K=\{1\}$, allora $HK \iso H \times K$.\footnote{Prova che $ab = ba$ per ogni $a \in H$ e $b \in K$ e quindi ricadi nella proprietà precedente.}
+\item %\label{prop:CardinalitaIntersezione}
+Se $H$ e $K$ sono finiti, allora
+\[ \card{HK}=\frac{\card{H}\card{K}}{\card{H\cap K}}. \]
+\end{enumerate}
+Le prime tre proprietà sono facili da verificare. Osserviamo soltanto che l'ultima segue facilmente dal {\scshape Primo Teorema di Isomorfismo} nel caso in cui $f$ è un isomorfismo. Tuttavia questo è un fatto molto più generale. Ne diamo una dimostrazione che usa quanto trattato fino ad ora delle azioni di gruppi. (Non ce n'è il bisogno, si può fare anche senza, ma è istruttivo per chi legge.)
+%
+\begin{proof}[Dimostrazione di~\ref{prop:CardinalitaIntersezione}]
+Consideriamo questa azione di $H \times K$ su $HK$
+\[\begin{aligned}
+(H \times K) \times HK &\to HK \\ 
+((h, k), x) &\mapsto hxk^{-1} .
+\end{aligned}\]
+Calcoliamo adesso lo stabilizzatore e l'orbita di $1 \in HK$. Lo stabilizzatore è
+\[\{(h, k) \in H \times K :  h 1 k^{-1} = 1\} = \{(h, k) \in H \times K :  h = k\}\]
+mentre l'orbita è
+\[\{h 1 k^{-1} : (h, k) \in H \times K\} = HK .\]
+Per la Proposizione~\ref{prop:StabilizzatoreOrbita}, abbiamo finito.
+\end{proof}
+\end{rich}
+
+Abbiamo gli strumenti ora per scrivere un {\em teorema di classificazione dei gruppi finiti} come quello che segue.
+
+\begin{teor}\label{teor:ClassificazioneGruppiFiniti}
+Sia $G$ un gruppo finito di cardinalità
+\[\card{G}=\prod_{i=1}^kp_i^{n_i}\]
+dove $p_1,\dots,p_k$ numeri primi a due a due distinti e $n_1,\dots,n_k > 0$. Per ognuno dei $p_i$ indichiamo con $H_i$ uno qualsiasi dei $p_i$-Sylow di $G$. Allora:
+\begin{enumerate}
+\item Se $s_{p_1} = \cdots = s_{p_k} = 1$, ovvero gli $H_i$ sono tutti normali, allora
+\[G \iso \prod_{i=1}^k H_i .\]
+\item Se $G \iso \prod_{i=1}^k G_i$ per dei $p_i$-gruppi $G_i$ con $i \in \{1,\dots,k\}$, allora $s_{p_i} = 1$ e $G_i \iso H_i$ per ogni $i \in \{1,\dots,k\}$.
+\end{enumerate}
+\end{teor}
+
+\begin{proof} La dimostrazione quindi è in due parti.
+\begin{enumerate}
+\item Per ipotesi, gli $H_i$ sono normali in $G$ e $\card{H_i} = p_i^{n_i}$. Noi dimostreremo che 
+\begin{quotation}
+$H_1\cdots{} H_j$ è un sottogruppo normale di $G$ che è isomorfo a $\prod_{i=1}^j H_i$ per ogni $1 \le j \le k$
+\end{quotation}
+Questo ci permette infatti di provare l'isomorfismo che vogliamo: infatti ha cardinalità $\card{\prod_{i=1}^k H_i} = \prod_{i=1}^k p_i^{n_i}$ è la stessa di $G$ per ipotesi, quindi, trattandosi di gruppi finiti, allora necessariamente $G = H_1 \cdots H_k$.\newline
+Andiamo per induzione su $j$. Il caso in cui $j=1$ è ovvio. Se $j>1$, allora
+\[H_1 \cdots{} H_{j-1} \normal G \quad \text{e} \quad H_1 \cdots{} H_{j-1} \iso \prod_{i=1}^{j-1} H_i\]
+per cui $\card{H_1 \cdots{} H_{j-1}}=\prod_{i=1}^{j-1}p_i^{n_i}$. Allora $H_1 \cdots{} H_j = H_1 \cdots{} H_{j-1}H_j \normal G$. Poi sicuramente tutti gli $H_i$ si intersecano banalmente. Quindi $H_1 \cdots{} H_j \iso H_1 \cdots{} H_{j-1} \times H_j\iso\prod_{i=1}^j H_i$.
+\item Qui, necessariamente i $G_i$ sono sottogruppi di Sylow. Scriviamo il prodotto diretto come $G'$ e consideriamo il sottogruppo
+\[G_j' := \{(g_1, \dots{}, g_k) \in G' : g_i = 1 \text{ per ogni } i \ne j\} .\]
+È facile verificare che è un sottogruppo normale di $G$ ed è isomorfo a $G_j$. La copia isomorfa di $G_j'$ in $G$ ha quindi $p_j^{n_j}$ elementi ed è normale in $G$. Poiché gli elementi della copia hanno ordini $p_j^r$ con $0 \le r \le n_j$, allora questa copia è proprio $H_j$. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{osse}
+Questo teorema è piuttosto interessante, anche perché se $G$ è abeliano, si ha quello che in Teoria dei Moduli ha il nome di {\scshape Teorema di Classificazione dei Gruppi Abeliani}. Osserviamo però che questo teorema vale per tutti i gruppi abeliani, non solo quelli finiti ai quali ci siamo ristretti in questi paragrafi.
+\end{osse}
